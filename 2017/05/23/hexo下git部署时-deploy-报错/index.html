@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Welcome!"/>
+        <meta property="og:title" content="hexo下git部署时(deploy)报错"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Archives: 2017/5 - Welcome!</title>
+    <title>hexo下git部署时(deploy)报错 - Welcome!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -130,76 +130,93 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://ojvrmnpos.bkt.clouddn.com/n.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2017/5</h1>
+                <div class="post-heading">
+                    <h1>hexo下git部署时(deploy)报错</h1>
+                    
+                    <h2 class="post-subheading">
+                        hexo部署到github时碰到的问题w
+                    </h2>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-05-23
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/hexo/">#hexo</a> <a href="/tags/git/">#git</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/hexo/">hexo</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2017/05/23/MacTex配置中文字体/">
-        <h1 class="post-title archive">
-            MacTex配置fontawesome
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-05-23
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2017/05/23/hexo下git部署时-deploy-报错/">
-        <h1 class="post-title archive">
-            hexo下git部署时(deploy)报错
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-05-23
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>最近重新部署了一下hexo博客，换了一下主题，更新了一下配置，其他都很容易解决了，但是deploy的时候一直报错，所以记录一下，也希望能帮到你w</p>
+<h2 id="Not-a-Git-Repository"><a href="#Not-a-Git-Repository" class="headerlink" title="Not a Git Repository"></a>Not a Git Repository</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal: Not a git repository (or any of the parent directories): .git</div></pre></td></tr></table></figure>
+<p>大概是这样报错的。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>删掉根目录下的文件夹：.deploy_git</p>
+<h2 id="Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed"><a href="#Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed" class="headerlink" title="Pushing to Git returning Error Code 403 fatal: HTTP request failed"></a>Pushing to Git returning Error Code 403 fatal: HTTP request failed</h2><p>刚刚解决<code>not a git repo</code>的问题，结果还是不能deploy，这个的原因是因为我本地git认证是用ssh的，但是<code>hexo</code>根目录下的<code>_config.yml</code>里我是这样写的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repository:https://github.com/username/username.github.io</div><div class="line">branch: master••••••••</div></pre></td></tr></table></figure>
+<p>将https连接改为ssh连接即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repository:git@github.com:username/username.github.io</div><div class="line">branch: master••••••••</div></pre></td></tr></table></figure>
+
+
+                
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=[object Object]"></script>
+
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_sharing_toolbox"></div>
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2017/05/01/hello-world/">
-        <h1 class="post-title archive">
-            Hello World
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-05-01
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />
