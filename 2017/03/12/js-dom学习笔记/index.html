@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="default">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="永远温柔可爱">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="petnakanojo">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="js dom学习笔记"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="永远温柔可爱" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Welcome!"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>js dom学习笔记 - Welcome!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">永远温柔可爱w</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://ojvrmnpos.bkt.clouddn.com/n.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>js dom学习笔记</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-03-12
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/js-dom/">#js-dom</a> <a href="/tags/notes/">#notes</a> <a href="/tags/javascript/">#javascript</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/javascript/">javascript</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>记录一下js dom的一些笔记，因为使用的还不是很好．从这个月开始加倍努力地学习．加油w</p>
+<a id="more"></a>
+<h3 id="什么是dom"><a href="#什么是dom" class="headerlink" title="什么是dom"></a>什么是dom</h3><p>说白了DOM就是浏览器为js提供的一系列接口，通过window.docement提供，通过这些接口我们可以操作web页面．</p>
+<p>推荐书籍：＜js dom编程艺术&gt;　很好看，谁看谁知道</p>
+<p>但是注意dom不是编程语言，只是文档对象的模型，该模型是独立于编程语言的，比如我们在py中也可以操作dom：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xml.dom.minidom <span class="keyword">as</span> m</div><div class="line">doc = m.parse(<span class="string">"C:\\Projects\\Py\\chap1.xml"</span>);</div><div class="line">doc.nodeName <span class="comment"># DOM property of document object;</span></div><div class="line">p_list = doc.getElementsByTagName(<span class="string">"para"</span>);</div></pre></td></tr></table></figure>
+<p>所以Web前端常讲的DOM API (web 或 XML 页面) = DOM + JS (脚本语言)</p>
+<h3 id="dom创建"><a href="#dom创建" class="headerlink" title="dom创建"></a>dom创建</h3><p>节点（node）通常对应一个标签一个文本，或者一个html属性，DOM节点有一个<code>nodeType</code>来表示当前元素的类型，是一个整数：</p>
+<ol>
+<li>Element，元素</li>
+<li>Attribute，属性</li>
+<li>Text，文本</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> el1 = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line"><span class="keyword">var</span> el2 = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</div><div class="line"><span class="keyword">var</span> node = <span class="built_in">document</span>.createTextNode(<span class="string">'hello world!'</span>);</div></pre></td></tr></table></figure>
+<h3 id="dom查询"><a href="#dom查询" class="headerlink" title="dom查询"></a>dom查询</h3><p>元素查询的api返回的结果是dom节点或者dom节点的列表，<code>document</code>提供了两种<code>query</code>的方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 返回当前文档中第一个类名为 "myclass" 的元素</span></div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">".myclass"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 返回一个文档中所有的class为"note"或者 "alert"的div元素</span></div><div class="line"><span class="keyword">var</span> els = <span class="built_in">document</span>.querySelectorAll(<span class="string">"div.note, div.alert"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 获取元素</span></div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'xxx'</span>);</div><div class="line"><span class="keyword">var</span> els = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'highlight'</span>);</div><div class="line"><span class="keyword">var</span> els = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'td'</span>);</div></pre></td></tr></table></figure>
+<p>同时，也提供了很多相对于元素的dom导航方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取父元素、父节点</span></div><div class="line"><span class="keyword">var</span> parent = ele.parentElement;</div><div class="line"><span class="keyword">var</span> parent = ele.parentNode;</div><div class="line"></div><div class="line"><span class="comment">// 获取子节点，子节点可以是任何一种节点，可以通过nodeType来判断</span></div><div class="line"><span class="keyword">var</span> nodes = ele.children;    </div><div class="line"></div><div class="line"><span class="comment">// 查询子元素</span></div><div class="line"><span class="keyword">var</span> els = ele.getElementsByTagName(<span class="string">'td'</span>);</div><div class="line"><span class="keyword">var</span> els = ele.getElementsByClassName(<span class="string">'highlight'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 当前元素的第一个/最后一个子元素节点</span></div><div class="line"><span class="keyword">var</span> el = ele.firstElementChild;</div><div class="line"><span class="keyword">var</span> el = ele.lastElementChild;</div><div class="line"></div><div class="line"><span class="comment">// 下一个/上一个兄弟元素节点</span></div><div class="line"><span class="keyword">var</span> el = ele.nextElementSibling;</div><div class="line"><span class="keyword">var</span> el = ele.previousElementSibling;</div></pre></td></tr></table></figure></p>
+<h3 id="dom更改"><a href="#dom更改" class="headerlink" title="dom更改"></a>dom更改</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加、删除子元素</span></div><div class="line">ele.appendChild(el);</div><div class="line">ele.removeChild(el);</div><div class="line"></div><div class="line"><span class="comment">// 替换子元素</span></div><div class="line">ele.replaceChild(el1, el2);</div><div class="line"></div><div class="line"><span class="comment">// 插入子元素</span></div><div class="line">parentElement.insertBefore(newElement, referenceElement);</div></pre></td></tr></table></figure>
+<p>js dom中是没有<code>insertAfter()</code>这个操作方式的，所以可以选择自己写一个<code>insertAfter()</code>函数，会比较方便．</p>
+<p>实现思路：先判断目前的元素节点是否是该父节点的最后一个子节点，如果是的话，直接appendChild即可；如果不是最后一个字节点．则获取想插入的元素节点的后一个元素节点的位置，此处使用的是<code>nextSibling</code>，然后使用<code>insertBefore</code><br>即可．</p>
+<p>附上<code>insertAfter</code>代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAfter</span> (<span class="params">newElement, targetElement</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> parent = targetElement.parentNode;<span class="comment">//获得该节点的上一个父节点，可以是元素节点，也可以是文本节点</span></div><div class="line">  <span class="keyword">if</span> (parent.lastChild == targetElement) &#123;</div><div class="line">    parent.appendChild(newElement);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    parent.insertBefore(newElement, targetElement.nextSibling);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取一个&#123;name, value&#125;的数组</span></div><div class="line"><span class="keyword">var</span> attrs = el.attributes;</div><div class="line"></div><div class="line"><span class="comment">// 获取、设置属性</span></div><div class="line"><span class="keyword">var</span> c = el.getAttribute(<span class="string">'class'</span>);</div><div class="line">el.setAttribute(<span class="string">'class'</span>, <span class="string">'highlight'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 判断、移除属性</span></div><div class="line">el.hasAttribute(<span class="string">'class'</span>);</div><div class="line">el.removeAttribute(<span class="string">'class'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 是否有属性设置</span></div><div class="line">el.hasAttributes();</div></pre></td></tr></table></figure>
+
+
+                
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=[object Object]"></script>
+
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_sharing_toolbox"></div>
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/podiumdesu" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/%E4%B8%BA%E7%BA%A2-%E7%8E%8B-4b4865134/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="mailto:wwhmomo@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 petnakanojo<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

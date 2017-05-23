@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="default">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="永远温柔可爱">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="petnakanojo">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="leetcode 448 Find All Numbers Disappeared in an Array"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="永远温柔可爱" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Welcome!"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>leetcode 448 Find All Numbers Disappeared in an Array - Welcome!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">永远温柔可爱w</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://ojvrmnpos.bkt.clouddn.com/n.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>leetcode 448 Find All Numbers Disappeared in an Array</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-02-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/notes/">#notes</a> <a href="/tags/algorithms/">#algorithms</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/leetcode/">leetcode</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文关于：</p>
+<ul>
+<li>448.Find All Numbers Disappeared in an Array</li>
+</ul>
+<p>更新记录：</p>
+<ul>
+<li>2017.2.5  [.js]ver1.0</li>
+</ul>
+<a id="more"></a>
+<h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p>Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.</p>
+<p>Find all the elements of [1, n] inclusive that do not appear in this array.</p>
+<p>Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">[4,3,2,7,8,2,3,1]</div><div class="line"></div><div class="line">Output:</div><div class="line">[5,6]</div></pre></td></tr></table></figure>
+<h3 id="js-ver1-0"><a href="#js-ver1-0" class="headerlink" title="[.js]ver1.0"></a>[.js]ver1.0</h3><p>第一次写的时候的想法是：使用<code>for</code>循环，让i遍历数组长度，再进行比对i是否包含在数组里面，如果不在的话将i<code>push</code>到一个新的空数组里。</p>
+<h4 id="踩的坑–i-in-a"><a href="#踩的坑–i-in-a" class="headerlink" title="踩的坑–i in a"></a>踩的坑–<code>i in a</code></h4><p>我在进行判断<strong>i是否包含在数组里</strong>时使用的是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> x = [];</div><div class="line"><span class="keyword">if</span> (i <span class="keyword">in</span> a == <span class="literal">false</span>)&#123;</div><div class="line">  x.push(i);</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(x);</div></pre></td></tr></table></figure></p>
+<p>输出结果是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[]</div></pre></td></tr></table></figure></p>
+<p>我原本使用的数据是<code>var a = [1,2,3,3],i = 4;</code>这样的输出结果是[4]，于是我在第一次写的时候就直接使用的<code>i in a</code>这样的判断方式。但是在我使用题目中的数据时始终得不到想要的答案。</p>
+<p><code>console.log()</code>检查过后，发现循环是没有错的，那错误的应该就是判断方法了。</p>
+<p>因为<code>i in a</code>这个判断方法是我直接脑内yy出来的，第一次的数据发现正好能用，于是就一直死磕。google了一下发现，果然脑内yy容易出问题。</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
+<li><a href="https://cnodejs.org/topic/56c20198c3f170d262995662" target="_blank" rel="external">js中如何判断一个元素是否在数组中</a></li>
+</ul>
+<p>原因很简单：</p>
+<blockquote>
+<p>使用<code>i in a</code>是判断的是否存在这个key，而array的key是它的index，这就很容易解释上述两组不同数据进行判断时得出的结果了。</p>
+</blockquote>
+<p>解决方法就是：</p>
+<p>用<code>if (a.indexOf i == -1)</code>来判断</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[]&#125; nums</div><div class="line"> * @return &#123;number[]&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> findDisappearedNumbers = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> array = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span> ; i &lt;= nums.length ; i++)&#123;</div><div class="line">        <span class="keyword">if</span> (nums.indexOf(i) == <span class="number">-1</span>)&#123;</div><div class="line">            array.push(i);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> array;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(findDisappearedNumbers[<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]);</div></pre></td></tr></table></figure>
+<p><img src="http://ojvrmnpos.bkt.clouddn.com/Screenshot_20170205_010854.png" title="噗"></p>
+<p>但是。。。这段代码run的时候显示的是finished，但是submit以后溢出了。。提交失败了。。人家要拿小拳拳捶你胸口哦！</p>
+
+
+                
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=[object Object]"></script>
+
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_sharing_toolbox"></div>
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/podiumdesu" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.linkedin.com/in/%E4%B8%BA%E7%BA%A2-%E7%8E%8B-4b4865134/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="mailto:wwhmomo@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 petnakanojo<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
