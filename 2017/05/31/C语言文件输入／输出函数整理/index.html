@@ -1,0 +1,805 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|hi:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C,I/O," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="Welcome!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在学习C语言文件输入输出的时候，感觉函数真的太多了，好难记啊。。。（">
+<meta name="keywords" content="C,I&#x2F;O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言文件输入／输出函数整理">
+<meta property="og:url" content="http://petnakanojo.com/blog/2017/05/31/C语言文件输入／输出函数整理/index.html">
+<meta property="og:site_name" content="Welcome!">
+<meta property="og:description" content="在学习C语言文件输入输出的时候，感觉函数真的太多了，好难记啊。。。（">
+<meta property="og:image" content="http://petnakanojo.com/images/c_io.png">
+<meta property="og:updated_time" content="2017-05-31T14:05:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言文件输入／输出函数整理">
+<meta name="twitter:description" content="在学习C语言文件输入输出的时候，感觉函数真的太多了，好难记啊。。。（">
+<meta name="twitter:image" content="http://petnakanojo.com/images/c_io.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://petnakanojo.com/blog/2017/05/31/C语言文件输入／输出函数整理/"/>
+
+
+
+
+
+  <title> C语言文件输入／输出函数整理 | Welcome! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Welcome!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">PetnaKanojo's blog</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://petnakanojo.com/blog/blog/2017/05/31/C语言文件输入／输出函数整理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="PetnaKanojo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/blog/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Welcome!">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Welcome!" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C语言文件输入／输出函数整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-31T20:59:22+08:00">
+                2017-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习C语言文件输入输出的时候，感觉函数真的太多了，好难记啊。。。（</p>
+<a id="more"></a>
+<h3 id="exit"><a href="#exit" class="headerlink" title="exit()"></a>exit()</h3><p>声明：<code>stdlib.h</code></p>
+<p>用处：关闭所有打开的文件并结束程序，正常结束的程序传递0，异常结束的程序传递非零值。</p>
+<p>返回值有宏： EXIT_SUCCESS/ EXIT_FAILURE</p>
+<h3 id="fopen"><a href="#fopen" class="headerlink" title="fopen()"></a>fopen()</h3><p>声明：<code>stdio.h</code></p>
+<p>参数： FILE <em> fopen(const char </em> path,const char * mode);</p>
+<p>第一个参数是待打开文件的名称，第2个参数是一个字符串，指定待打开文件的模式</p>
+<p><img src="/images/c_io.png" alt="模式字符串"></p>
+<p>返回值：成功后，返回<em>文件指针</em>，打开失败返回<em>NULL</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span><span class="comment">//为了使用exit()</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">0</span>; <span class="comment">//用于putchar&amp;getc的数据接收</span></div><div class="line">    <span class="keyword">char</span> ch;</div><div class="line">    FILE * fp=<span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">char</span> fname[<span class="number">50</span>];<span class="comment">//用于存放文件名</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入文件名："</span>);</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,fname);</div><div class="line">    fp=fopen(fname,<span class="string">"r"</span>);<span class="comment">//只供读取</span></div><div class="line">    <span class="keyword">if</span>(fp==<span class="literal">NULL</span>)<span class="comment">//如果失败了</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"错误！"</span>);</div><div class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);<span class="comment">//中止程序</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//while((ch=getc(fp))!=EOF)</span></div><div class="line">        <span class="keyword">while</span>((ch[i]=getc(fp))!=EOF)&#123;</div><div class="line">            <span class="built_in">putchar</span>(ch[i]);</div><div class="line">                i++</div><div class="line">    &#125;</div><div class="line">        fclose(fp);<span class="comment">//关闭文件</span></div><div class="line">    fp=<span class="literal">NULL</span>;<span class="comment">//需要指向空，否则会指向原打开文件地址</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="fclose"><a href="#fclose" class="headerlink" title="fclose()"></a>fclose()</h3><p><code>fclose(fp)</code>函数关闭fp指定的文件。</p>
+<p>返回值：如果成功关闭，返回<code>0</code>，否则返回EOF。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>标准文件</strong></th>
+<th style="text-align:center"><strong>文件指针</strong></th>
+<th style="text-align:center"><strong>通常使用的设备</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">标准输入</td>
+<td style="text-align:center">stdin</td>
+<td style="text-align:center">键盘</td>
+</tr>
+<tr>
+<td style="text-align:center">标准输出</td>
+<td style="text-align:center">stdout</td>
+<td style="text-align:center">显示器</td>
+</tr>
+<tr>
+<td style="text-align:center">标准错误</td>
+<td style="text-align:center">stderr</td>
+<td style="text-align:center">显示器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getc-和putc"><a href="#getc-和putc" class="headerlink" title="getc()和putc()"></a>getc()和putc()</h3><p><code>ch = getc(fp)</code>表示“从fp指定的文件中获取一个字符”。</p>
+<p><code>putc(ch,fpout)</code>表示“把字符ch放入fpout指定的文件中”。</p>
+<p>putc()的参数列表中：第1个参数是待写入的字符，第2个参数是文件指针。</p>
+<h3 id="文件结尾EOF"><a href="#文件结尾EOF" class="headerlink" title="文件结尾EOF"></a>文件结尾EOF</h3><p>设计范例1：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> ch;</div><div class="line">FILE *fp;</div><div class="line">fp = fopen(<span class="string">"wacky.txt"</span>,<span class="string">"r"</span>);</div><div class="line">ch = getc(fp);</div><div class="line"><span class="keyword">while</span> (ch != EOF) &#123;</div><div class="line">  <span class="built_in">putchar</span>(ch);</div><div class="line">  ch = getc(fp);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>设计范例2<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> ch;</div><div class="line">FILE * fp;</div><div class="line">fp = fopen(<span class="string">"wacky.txt"</span>,<span class="string">"r"</span>);</div><div class="line"><span class="keyword">while</span> ((ch = getc(fp)) != EOF) &#123;</div><div class="line">  <span class="built_in">putchar</span>(ch);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="fprintf"><a href="#fprintf" class="headerlink" title="fprintf()"></a>fprintf()</h3><p>声明： <code>stdio.h</code></p>
+<p>参数：int fprintf( FILE <em> stream, const char </em> format, [ argument ]…)</p>
+<p>第1个参数是<em>文件指针</em>，第2个参数是<em>输出格式</em>，第3个参数是<em>附加参数列表</em></p>
+<p>应用：格式化输出到一个流/文件</p>
+<p>应用示例1：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//...</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    FILE * FSPOINTER;</div><div class="line">    <span class="keyword">char</span> STRBUFF[<span class="number">16</span>] = <span class="string">"Hello World."</span>;</div><div class="line">    <span class="comment">//...</span></div><div class="line">    FSPOINTER = fopen(<span class="string">"HELLO.TXT"</span>, <span class="string">"w+"</span>);</div><div class="line">    <span class="comment">//...</span></div><div class="line">    <span class="built_in">fprintf</span>(FSPOINTER, <span class="string">"%s"</span>, STRBUFF);</div><div class="line">    <span class="comment">//...</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出至文件<code>HELLO.TXT</code>：</p>
+<pre>Hello World</pre>
+
+<p>应用示例2:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;process.h&gt;</span></span></div><div class="line">FILE * stream;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">10</span>;</div><div class="line">    <span class="keyword">double</span> fp = <span class="number">1.5</span>;</div><div class="line">    <span class="keyword">char</span> s[] = <span class="string">"this is a string"</span>;</div><div class="line">    <span class="keyword">char</span> c = <span class="string">'\n'</span>;</div><div class="line">    stream = fopen(<span class="string">"fprintf.out"</span>, <span class="string">"w"</span>);</div><div class="line">    <span class="built_in">fprintf</span>(stream, <span class="string">"%s%c"</span>, s, c);</div><div class="line">    <span class="built_in">fprintf</span>(stream, <span class="string">"%d\n"</span>, i);</div><div class="line">    <span class="built_in">fprintf</span>(stream, <span class="string">"%f\n"</span>, fp);</div><div class="line">    fclose(stream);</div><div class="line">    system(<span class="string">"typefprintf.out"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出至文件<code>fprintf.out</code>：</p>
+<pre>
+this is a string
+10
+1.500000
+</pre>
+
+<h3 id="fscanf"><a href="#fscanf" class="headerlink" title="fscanf()"></a>fscanf()</h3><p>声明：<code>stdio.h</code></p>
+<p>参数：int fscanf(FILE <em> stream, const char </em> format, [argument…]);</p>
+<p>功能：根据数据格式(format)从输入流(stream)中写入数据(argument)；与fgets的差别在于：fscanf遇到空格和换行时结束，注意空格时也结束，fgets遇到空格不结束。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line">FILE *stream;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">long</span> l;</div><div class="line">    <span class="keyword">float</span> fp;</div><div class="line">    <span class="keyword">char</span> s[<span class="number">81</span>];</div><div class="line">    <span class="keyword">char</span> c;</div><div class="line">    stream = fopen(<span class="string">"fscanf.out"</span>, <span class="string">"w+"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(stream==<span class="literal">NULL</span>)</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The file fscanf.out was not opened\n"</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">fprintf</span>(stream,<span class="string">"%s%ld%f%c"</span>,<span class="string">"a-string"</span>, <span class="number">65000</span>,<span class="number">3.14159</span>, <span class="string">'x'</span>);</div><div class="line">        <span class="comment">/*将指针设置至文件开头*/</span></div><div class="line">        fseek(stream,<span class="number">0L</span>,SEEK_SET);</div><div class="line">        <span class="comment">/*从文件中读取数据*/</span></div><div class="line">        <span class="built_in">fscanf</span>(stream,<span class="string">"%s"</span>,s);</div><div class="line">        <span class="built_in">fscanf</span>(stream,<span class="string">"%ld"</span>,&amp;l);</div><div class="line">        <span class="built_in">fscanf</span>(stream,<span class="string">"%f"</span>,&amp;fp);</div><div class="line">        <span class="built_in">fscanf</span>(stream,<span class="string">"%c"</span>,&amp;c);</div><div class="line">       <span class="comment">/*输出读取的数据*/</span></div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,s);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,l);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%f\n"</span>,fp);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%c\n"</span>,c);</div><div class="line">        fclose(stream);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//这样会有意外输出</span></div></pre></td></tr></table></figure>
+<h3 id="fgets"><a href="#fgets" class="headerlink" title="fgets()"></a>fgets()</h3><p>声明：<code>stdio.h</code></p>
+<p>参数：char <em> fgets(char </em> buf, int bufsize, FILE * stream);</p>
+<pre>
+* \*buf: 字符型指针，指向用来存储所得数据的地址。
+* \*bufsize: 整型数据，指明存储数据的大小。
+* \*stream: 文件结构体指针，将要读取的文件流。
+</pre>
+
+<p>如果文件中的该行，不足bufsize个字符，则读完该行就结束。如若该行（包括最后一个换行符）的字符数超过bufsize-1，则fgets只返回一个不完整的行，但是，缓冲区总是以NULL字符结尾，对fgets的下一次调用会继续读该行</p>
+<p>应用示例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( <span class="keyword">void</span> )</span></span></div><div class="line">&#123;</div><div class="line">    FILE*stream;</div><div class="line">    <span class="keyword">char</span> <span class="built_in">string</span>[]=<span class="string">"Thisisatest"</span>;</div><div class="line">    <span class="keyword">char</span> msg[<span class="number">20</span>];</div><div class="line"><span class="comment">/*openafileforupdate*/</span></div><div class="line">    stream=fopen(<span class="string">"DUMMY.FIL"</span>,<span class="string">"w+"</span>);</div><div class="line"><span class="comment">/*writeastringintothefile*/</span></div><div class="line">    fwrite(<span class="built_in">string</span>,<span class="built_in">strlen</span>(<span class="built_in">string</span>),<span class="number">1</span>,stream);</div><div class="line"><span class="comment">/*seektothestartofthefile*/</span></div><div class="line">    fseek(stream,<span class="number">0</span>,SEEK_SET);</div><div class="line"><span class="comment">/*readastringfromthefile*/</span></div><div class="line">    fgets(msg,<span class="built_in">strlen</span>(<span class="built_in">string</span>)+<span class="number">1</span>,stream);</div><div class="line"><span class="comment">/*displaythestring*/</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,msg);</div><div class="line">    fclose(stream);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>fgets函数用来从文件中读入字符串。fgets函数的调用形式如下：fgets（str，n，fp）；此处，fp是文件指针；str是存放在字符串的起始地址；n是一个int类型变量。函数的功能是从fp所指文件中读入n-1个字符放入str为起始地址的空间内；<strong>如果在未读满n-1个字符之时，已读到一个换行符或一个EOF（文件结束标志），则结束本次读操作，读入的字符串中最后包含读到的换行符。</strong>  因此，确切地说，调用fgets函数时，最多只能读入n-1个字符。读入结束后，系统将自动在最后加’\0’，并以str作为函数值返回。</p>
+<h3 id="fputs"><a href="#fputs" class="headerlink" title="fputs()"></a>fputs()</h3><p>参数：接受两个参数：第1个是字符串的地址；第2个是文件指针。该函数根据传入地址找到的字符串写入指定的文件中。在打印的时候不会在末尾添加换行符。</p>
+<h3 id="常用的检查"><a href="#常用的检查" class="headerlink" title="常用的检查"></a>常用的检查</h3><ol>
+<li><p>检查命令行参数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (argc &lt; <span class="number">2</span>) &#123;</div><div class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"Usage: %s filename\n"</span>,argv[<span class="number">0</span>]);</div><div class="line">  <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置输入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ((in = fopen(argv[<span class="number">1</span>],<span class="string">"r"</span>)) == <span class="literal">NULL</span>) &#123;</div><div class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"I couldn't open thje file \"%s\" \n"</span>,argv[<span class="number">1</span>]);</div><div class="line">  <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置输出：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if ((out = fopen(name, "w")) == NULL) &#123;</div><div class="line">  fprintf(stderr,"Can't create output file.</div><div class="line">  \n");</div><div class="line">  exit(3);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/C/" rel="tag"># C</a>
+          
+            <a href="/blog/tags/I-O/" rel="tag"># I/O</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/05/31/HTTP权威指南学习笔记（一）/" rel="next" title="HTTP权威指南学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> HTTP权威指南学习笔记（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.jpg"
+               alt="PetnaKanojo" />
+          <p class="site-author-name" itemprop="name">PetnaKanojo</p>
+          <p class="site-description motion-element" itemprop="description">永远温柔可爱</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/blog/archives">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/blog/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#exit"><span class="nav-number">1.</span> <span class="nav-text">exit()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen"><span class="nav-number">2.</span> <span class="nav-text">fopen()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fclose"><span class="nav-number">3.</span> <span class="nav-text">fclose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getc-和putc"><span class="nav-number">4.</span> <span class="nav-text">getc()和putc()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件结尾EOF"><span class="nav-number">5.</span> <span class="nav-text">文件结尾EOF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fprintf"><span class="nav-number">6.</span> <span class="nav-text">fprintf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fscanf"><span class="nav-number">7.</span> <span class="nav-text">fscanf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fgets"><span class="nav-number">8.</span> <span class="nav-text">fgets()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fputs"><span class="nav-number">9.</span> <span class="nav-text">fputs()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的检查"><span class="nav-number">10.</span> <span class="nav-text">常用的检查</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PetnaKanojo</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+  <span>|&nbsp;  <a href="http://www.miitbeian.gov.cn/">  沪ICP备17003868号-1  </a></span>
+  <span id="busuanzi_container_site_uv">
+      |&nbsp;  view <span id="busuanzi_value_site_uv"></span> times
+  </span>
+
+
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <!--
+<script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.0"></script>
+-->
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
