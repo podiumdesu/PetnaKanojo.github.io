@@ -90,7 +90,12 @@ figure {
 hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  height: 0;
+/*height: 0;*/
+  border: none;
+  background-color: #ddd;
+  background-image: repeating-linear-gradient(-45deg, #fff, #fff 4px, transparent 4px, transparent 8px);
+  margin: 20px 0;
+  height: 2px;
 }
 pre {
   overflow: auto;
@@ -1685,7 +1690,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #af987a;
+  background: #09d6b5;
 }
 .links-of-blogroll {
   font-size: 13px;
