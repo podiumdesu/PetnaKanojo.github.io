@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/07/16/git日常使用的一些整理/index.html">
 <meta property="og:site_name" content="Welcome!">
 <meta property="og:description" content="虽然日常使用git，但是对它很多时候还是常常无从下手甚至非常担心一个误操作就导致之前的代码都前功尽弃。以前碰到过也解决了很多git的问题，但是经常再碰到的时候就又忘记解决方法，然后又要去查，非常浪费时间，所以就以后都记录一下好啦。（顺便就可以经常更新博客了嘻嘻">
-<meta property="og:updated_time" content="2017-07-16T13:10:30.000Z">
+<meta property="og:updated_time" content="2017-08-10T07:37:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git日常使用的一些整理">
 <meta name="twitter:description" content="虽然日常使用git，但是对它很多时候还是常常无从下手甚至非常担心一个误操作就导致之前的代码都前功尽弃。以前碰到过也解决了很多git的问题，但是经常再碰到的时候就又忘记解决方法，然后又要去查，非常浪费时间，所以就以后都记录一下好啦。（顺便就可以经常更新博客了嘻嘻">
@@ -371,25 +371,17 @@
 </blockquote>
 <p>在pull之前，可以先比较本地仓库和远程仓库之间的差异</p>
 <ol>
-<li>添加需要比较的远程仓库：</li>
+<li><p>添加需要比较的远程仓库：<code>git remote add foobar git@github.com:${username}/${reponame}.git</code></p>
+</li>
+<li><p>取回foobar的内容，fetch不会修改本地的内容：<code>git fetch foobar</code></p>
+</li>
+<li><p>比较本地分支和远程分支之间的差异：<code>git diff master foobar/master</code></p>
+</li>
+<li><p>远程分支已经修改，本地未同步的变更：<code>git diff HEAD...origin/master</code></p>
+</li>
+<li><p>本地分支已经修改，远程未同步的变更：<code>git diff origin/master...HEAD</code></p>
+</li>
 </ol>
-<p><code>git remote add foobar git@github.com:${username}/${reponame}.git</code></p>
-<ol>
-<li>取回foobar的内容，fetch不会修改本地的内容：</li>
-</ol>
-<p><code>git fetch foobar</code></p>
-<ol>
-<li>比较本地分支和远程分支之间的差异</li>
-</ol>
-<p><code>git diff master foobar/master</code></p>
-<ol>
-<li>远程分支已经修改，本地未同步的变更</li>
-</ol>
-<p><code>git diff HEAD...origin/master</code></p>
-<ol>
-<li>本地分支已经修改，远程未同步的变更</li>
-</ol>
-<p><code>git diff origin/master...HEAD</code></p>
 
       
     </div>
