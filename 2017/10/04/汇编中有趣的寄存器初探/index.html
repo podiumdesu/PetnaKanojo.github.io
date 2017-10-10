@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/10/04/汇编中有趣的寄存器初探/index.html">
 <meta property="og:site_name" content="Welcome!">
 <meta property="og:description" content="最近在学习汇编的时候，每次debug的时候对于小白来说真的是一头雾水，完全不明白这些个寄存器究竟是什么东西。之前没有记住，所以这篇文章就用来稍微记录一下。">
-<meta property="og:updated_time" content="2017-10-04T12:39:19.000Z">
+<meta property="og:updated_time" content="2017-10-10T03:22:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编中有趣的寄存器初探">
 <meta name="twitter:description" content="最近在学习汇编的时候，每次debug的时候对于小白来说真的是一头雾水，完全不明白这些个寄存器究竟是什么东西。之前没有记住，所以这篇文章就用来稍微记录一下。">
@@ -385,6 +385,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">栈顶的段地址存放在SS中，偏移地址存放在SP中。任意时刻，SS:SP指向栈顶元素。</div></pre></td></tr></table></figure>
 <p>push，pop指令实质上就是一种内存传送指令，可以在寄存器和内存之间传送数据，但是push和pop指令访问的内存单元的地址不是在指令中给出的，而是由SS:SP指出的，同时，push和pop指令还会改变SP中的内容。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PS 用来存放程序的标志</div><div class="line"></div><div class="line">CS 存放的是代码段地址</div><div class="line"></div><div class="line">DS 存放的是数据段地址</div></pre></td></tr></table></figure>
+<h3 id="对各个寄存器做一下总结"><a href="#对各个寄存器做一下总结" class="headerlink" title="对各个寄存器做一下总结"></a>对各个寄存器做一下总结</h3><p>CPU对寄存器还是有比较多要求的，比如说loop的时候只能用cx计数。当有多重循环的时候，内层的循环可能会使cx的值发生改变，于是可以使用以下方法寄存cx的值：</p>
+<ol>
+<li>将cx的值寄存在其他reg（寄存器）中。缺点：当寄存器不够用的时候怎么办呢？</li>
+<li>数据段中dw一个数据，使用它来寄存cx的值。缺点：</li>
+</ol>
 <h3 id="关于debug"><a href="#关于debug" class="headerlink" title="关于debug"></a>关于debug</h3><ol>
 <li>程序加载后，ds中存放着程序所在内存区的段地址，这个内存区的偏移地址是0，则程序所在的内存区的地址为ds:0</li>
 <li>这个内存区的前256个字节中存放的是PSP，DOS用来和程序进行通信，从256字节处向后的空间存放的是程序。</li>
@@ -393,6 +398,13 @@
 <p>在debug中的时候，注意要使用P命令执行int 21。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">U 看一下其他命令</div><div class="line">T 单步执行程序中的每一条指令</div><div class="line">P 使用P命令执行int 21h</div></pre></td></tr></table></figure>
 <p>在dos中用<code>debug test.exe</code>运行Debug对test.exe进行跟踪时，程序加载的顺序是：command加载Debug，Debug加载test.exe。返回的顺序是，从test.exe中的程序返回到Debug，从Debug返回到command。</p>
+<p>在使用debug模式的时候，使用r检查当前各个寄存器的情况，DS和CS之间我一直想知道他们的关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">cs是值cpu执行的当前指令的段地址，ds是数据开始的段地址。</div><div class="line"></div><div class="line">通俗来讲，CS是告诉CPU，去哪个位置找内容当成指令去执行，</div><div class="line">DS是告诉CPU，去哪个位置找内容当成数据被使用，用它们的扩展名便可以知晓区别：</div><div class="line"></div><div class="line">datastring=ds</div><div class="line">codestring=cs</div><div class="line"></div><div class="line">CPU要执行CS中的指令 指令用到的数据可能就存放在DS中。</div><div class="line">你可以把数据放到CS中 但是CPU并不把它当成数据来使用，你也可以把指令放到DS中，但是CPU根本不去DS里读指令。</div></pre></td></tr></table></figure>
+<h4 id="简单的实例学习"><a href="#简单的实例学习" class="headerlink" title="简单的实例学习"></a>简单的实例学习</h4><ol>
+<li>王爽汇编 P127， 将程序中给定的数据逆序存放</li>
+</ol>
+<p>代码编写如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg</div><div class="line"></div><div class="line">stacksg segment stack</div><div class="line">  dw 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</div><div class="line"></div><div class="line">  dw 0123h, 0456h, 0789h, 0abch, 0defh, 0fedh, 0cbah, 0987h</div><div class="line"></div><div class="line"></div><div class="line">stacksg ends</div><div class="line"></div><div class="line"></div><div class="line">codesg segment</div><div class="line"></div><div class="line">  start:  </div><div class="line">          mov sp, 30h</div><div class="line">          mov cx, 8</div><div class="line">          mov bx, 0</div><div class="line">      s:  push cs:[bx]</div><div class="line">          add bx, 2</div><div class="line">          loop s</div><div class="line"></div><div class="line">          mov cx, 8</div><div class="line">          mov bx, 0</div><div class="line">      s1: pop cs:[bx]</div><div class="line">          add bx, 2</div><div class="line">          loop s1</div><div class="line"></div><div class="line">      mov ax, 4c00h</div><div class="line">      int 21h</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure></p>
+<p>masm以及link过后，进入debug模式，-r查看各寄存器的状态，请注意DS，CS之间的地址差距。正确理解～（大概是我不想写了，所以有空再解释）</p>
 
       
     </div>
@@ -436,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/06/算是新学期的一点点期待/" rel="prev" title="算是新学期的一点点期待">
+                算是新学期的一点点期待 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -505,7 +521,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -514,7 +530,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -523,7 +539,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -565,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于debug"><span class="nav-number">1.</span> <span class="nav-text">关于debug</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对各个寄存器做一下总结"><span class="nav-number">1.</span> <span class="nav-text">对各个寄存器做一下总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于debug"><span class="nav-number">2.</span> <span class="nav-text">关于debug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的实例学习"><span class="nav-number">2.1.</span> <span class="nav-text">简单的实例学习</span></a></li></ol></li></ol></div>
             
 
           </div>
