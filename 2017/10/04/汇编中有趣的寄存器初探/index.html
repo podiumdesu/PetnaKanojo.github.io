@@ -98,10 +98,12 @@
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/10/04/汇编中有趣的寄存器初探/index.html">
 <meta property="og:site_name" content="Welcome!">
 <meta property="og:description" content="最近在学习汇编的时候，每次debug的时候对于小白来说真的是一头雾水，完全不明白这些个寄存器究竟是什么东西。之前没有记住，所以这篇文章就用来稍微记录一下。">
-<meta property="og:updated_time" content="2017-10-10T03:22:37.000Z">
+<meta property="og:image" content="http://moe.petnakanojo.com/images/exetolink.png">
+<meta property="og:updated_time" content="2017-10-22T08:42:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编中有趣的寄存器初探">
 <meta name="twitter:description" content="最近在学习汇编的时候，每次debug的时候对于小白来说真的是一头雾水，完全不明白这些个寄存器究竟是什么东西。之前没有记住，所以这篇文章就用来稍微记录一下。">
+<meta name="twitter:image" content="http://moe.petnakanojo.com/images/exetolink.png">
 
 
 
@@ -399,7 +401,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">U 看一下其他命令</div><div class="line">T 单步执行程序中的每一条指令</div><div class="line">P 使用P命令执行int 21h</div></pre></td></tr></table></figure>
 <p>在dos中用<code>debug test.exe</code>运行Debug对test.exe进行跟踪时，程序加载的顺序是：command加载Debug，Debug加载test.exe。返回的顺序是，从test.exe中的程序返回到Debug，从Debug返回到command。</p>
 <p>在使用debug模式的时候，使用r检查当前各个寄存器的情况，DS和CS之间我一直想知道他们的关系。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">cs是值cpu执行的当前指令的段地址，ds是数据开始的段地址。</div><div class="line"></div><div class="line">通俗来讲，CS是告诉CPU，去哪个位置找内容当成指令去执行，</div><div class="line">DS是告诉CPU，去哪个位置找内容当成数据被使用，用它们的扩展名便可以知晓区别：</div><div class="line"></div><div class="line">datastring=ds</div><div class="line">codestring=cs</div><div class="line"></div><div class="line">CPU要执行CS中的指令 指令用到的数据可能就存放在DS中。</div><div class="line">你可以把数据放到CS中 但是CPU并不把它当成数据来使用，你也可以把指令放到DS中，但是CPU根本不去DS里读指令。</div></pre></td></tr></table></figure>
+<p><img src="/images/exetolink.png" alt="exe文件中程序的加载过程"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">cs是值cpu执行的当前指令的段地址，ds是数据开始的段地址。</div><div class="line"></div><div class="line">通俗来讲，CS是告诉CPU，去哪个位置找内容当成指令去执行，</div><div class="line">DS是告诉CPU，去哪个位置找内容当成数据被使用，用它们的扩展名便可以知晓区别：</div><div class="line"></div><div class="line">datastring=ds</div><div class="line">codestring=cs</div><div class="line"></div><div class="line">CPU要执行CS中的指令 指令用到的数据可能就存放在DS中。</div><div class="line">你可以把数据放到CS中 但是CPU并不把它当成数据来使用，你也可以把指令放到DS中，但是CPU根本不去DS里读指令。</div></pre></td></tr></table></figure></p>
 <h4 id="简单的实例学习"><a href="#简单的实例学习" class="headerlink" title="简单的实例学习"></a>简单的实例学习</h4><ol>
 <li>王爽汇编 P127， 将程序中给定的数据逆序存放</li>
 </ol>
