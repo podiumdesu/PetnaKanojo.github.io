@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|hi:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="notes,react," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Welcome!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="只是自己在阅读学习React官方文档时的一点点记录，建议需要学习React的移步官方文档去学习。">
+<meta name="keywords" content="notes,react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React官方文档学习记录">
+<meta property="og:url" content="http://moe.petnakanojo.com/2017/11/11/React官方文档学习记录/index.html">
+<meta property="og:site_name" content="Welcome!">
+<meta property="og:description" content="只是自己在阅读学习React官方文档时的一点点记录，建议需要学习React的移步官方文档去学习。">
+<meta property="og:updated_time" content="2017-11-12T08:38:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React官方文档学习记录">
+<meta name="twitter:description" content="只是自己在阅读学习React官方文档时的一点点记录，建议需要学习React的移步官方文档去学习。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://moe.petnakanojo.com/2017/11/11/React官方文档学习记录/"/>
+
+
+
+
+
+  <title> React官方文档学习记录 | Welcome! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Welcome!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">PetnaKanojo's blog</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-apostil">
+          <a href="/apostil" rel="section">
+            
+            札记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friendlinks">
+          <a href="/friendlinks" rel="section">
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://moe.petnakanojo.com/2017/11/11/React官方文档学习记录/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="PetnaKanojo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Welcome!">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Welcome!" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React官方文档学习记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T16:35:30+08:00">
+                2017-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>只是自己在阅读学习React官方文档时的一点点记录，建议需要学习React的移步官方文档去学习。</p>
+<a id="more"></a>
+<h3 id="渲染元素"><a href="#渲染元素" class="headerlink" title="渲染元素"></a>渲染元素</h3><blockquote>
+<p>元素是在React应用中 最小的 建设模块</p>
+</blockquote>
+<p>这是最简单的一种方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> element = &lt;h1&gt;Hello,world&lt;/h1&gt;</div><div class="line">ReactDOM.render(</div><div class="line">  element,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<h4 id="接下来让我们更新这个渲染元素"><a href="#接下来让我们更新这个渲染元素" class="headerlink" title="接下来让我们更新这个渲染元素"></a>接下来让我们更新这个渲染元素</h4><p>请注意，react元素是不可以改变的。一旦你创建了这个元素，你就不能修改它的子元素或者属性。因为它现在就不变啦。</p>
+<p>我们目前只知道创建一个新元素，然后把它放进ReactDOM.render()这个方法中。</p>
+<p>让我们考虑这个时钟示例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function tick() &#123;</div><div class="line">  const element = &#123;</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;h1&gt;hello,world&lt;/h1&gt;</div><div class="line">      &lt;h2&gt;It is &#123;new Date().toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &#125;;</div><div class="line">  ReactDOM.render(</div><div class="line">    element,</div><div class="line">    document.getElementById('root')</div><div class="line">  );</div><div class="line">&#125;</div><div class="line">setInterval(tick, 1000);</div></pre></td></tr></table></figure>
+<p>这个就是将元素以及渲染方式都放进函数中，之后对函数进行反复的回调。</p>
+<p>我们目前只知道一种方式去渲染新的UI。我们调用<code>ReactDOM.render()</code>来渲染整个UI</p>
+<p>这种方式应该是直接将tick做成一个组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> element = (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;h1&gt;Hello, world!&lt;/h1&gt;</div><div class="line">      &lt;h2&gt;It is &#123;new Date().toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">  ReactDOM.render(</div><div class="line">    element,</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line">setInterval(tick, <span class="number">1000</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="React只会更新那些需要更新的东西"><a href="#React只会更新那些需要更新的东西" class="headerlink" title="React只会更新那些需要更新的东西"></a>React只会更新那些需要更新的东西</h4><p>大概好像是对比props的变化之后对dom中需要修改的东西进行重新的渲染。</p>
+<h3 id="组件和属性"><a href="#组件和属性" class="headerlink" title="组件和属性"></a>组件和属性</h3><p>组件可以让你将UI分解成单独的而且是可以复用的内容中，在思考中也是将这每块进行独立的思考。</p>
+<p><small>概念上来讲，组件就像是JavaScript中的函数。它们接收特定的输入，（叫做”props”），并且返回那些用来描述应该显示在屏幕上的内容的React元素。</small></p>
+<p>这样应该比较好理解吧。</p>
+<h4 id="函数式和类元素"><a href="#函数式和类元素" class="headerlink" title="函数式和类元素"></a>函数式和类元素</h4><p>最简单定义一个组件的方式是使用JavaScript函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &lt;h1&gt;Hello, &#123;props.name&#125;&lt;/h1&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样你也可以用一个es6的类来定义一个组件</p>
+<p>这样的话都可以将这些显示成用户定义的组件。可以像这样进行使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> element = &lt;Welcome name="Sara" /&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>警告：<br>请永远使用一个大写字母来命名一个组件的名字。</p>
+</blockquote>
+<h4 id="将组件组合起来"><a href="#将组件组合起来" class="headerlink" title="将组件组合起来"></a>将组件组合起来</h4><p>我们同样可以在其他的组件中疯狂调用之前的组件，就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &lt;h1&gt;Hello, &#123;props.name&#125;&lt;/h1&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;Welcome name="Sara" /&gt;</div><div class="line">      &lt;Welcome name="Cahal" /&gt;</div><div class="line">      &lt;Welcome name="Edite" /&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;App /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
+<h4 id="分离组件"><a href="#分离组件" class="headerlink" title="分离组件"></a>分离组件</h4><p>这一段主要介绍的是如何将一个组件分成各个小的完成不同功能的组件，这样有助于复用。</p>
+<p><small>个人比较欣赏将各个小功能都拆分出来，这样的话对于后面的很多事来讲都可以减少很多重构的压力，而且这也大概是函数式编程的终极奥义？？？虽然这个可能跟函数式编程没什么太大的关系orz</small></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Comment</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div className="Comment"&gt;</div><div class="line">      &lt;div className="UserInfo"&gt;</div><div class="line">        &lt;img className="Avatar"</div><div class="line">          src=&#123;props.author.avatarUrl&#125;</div><div class="line">          alt=&#123;props.author.name&#125;</div><div class="line">        /&gt;</div><div class="line">        &lt;div className="UserInfo-name"&gt;</div><div class="line">          &#123;props.author.name&#125;</div><div class="line">        &lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div className="Comment-text"&gt;</div><div class="line">        &#123;props.text&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div className="Comment-date"&gt;</div><div class="line">        &#123;formatDate(props.date)&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>props.author.avatarUrl</code>这里接收的是作为<code>object</code>的<code>author</code>。</p>
+<p>这样真的很麻烦，然后大概是先拆出<code>Avatar</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Avatar</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;img className="Avatar"</div><div class="line">      src=&#123;props.user.avatarUrl&#125;</div><div class="line">      alt=&#123;props.user.name&#125;</div><div class="line">    /&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后是UserInfo这个组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">UserInfo</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div className="UserInfo"&gt;</div><div class="line">      &lt;Avatar user=&#123;props.user&#125; /&gt;</div><div class="line">      &lt;div className="UserInfo-name"&gt;</div><div class="line">        &#123;props.user.name&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>剩下的一些化简我看懂了，所以不再这里继续赘述了，大概的意思就是指疯狂拆分就是啦～</p>
+<h4 id="props是只读的"><a href="#props是只读的" class="headerlink" title="props是只读的"></a>props是只读的</h4><p>当你用函数或者类声明一个组件的时候，它永远也不会修改它自身的<code>props</code>（我是真的不知道这个props究竟应该如何翻译）</p>
+<p>而且这里介绍一个纯函数的定义：</p>
+<blockquote>
+<p>纯函数就是它们不会企图去修改它们的输入，而且对于同样的输入会返回同样的输出。</p>
+</blockquote>
+<p>React是非常灵活的，但是它有一个非常严格的标准：<br><strong>所有的React组件对待它们的props的时候一定要像纯函数那样表现！!</strong></p>
+<h3 id="状态以及生命周期"><a href="#状态以及生命周期" class="headerlink" title="状态以及生命周期"></a>状态以及生命周期</h3><p>但是下面这块我们将学习如何让<code>clock</code>这个组件更加的可复用以及可分解。这个组件用处就是设置自己的timer并且每秒进行更新<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Clock</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;h1&gt;Hello, world!&lt;/h1&gt;</div><div class="line">      &lt;h2&gt;It is &#123;props.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  ReactDOM.render(</div><div class="line">    &lt;Clock date=&#123;new Date()&#125; /&gt;,</div><div class="line">    document.getElementById('root')</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line">setInterval(tick, 1000);</div></pre></td></tr></table></figure></p>
+<p>理想的情况下是我们只想写一次，然后让它自己更新自己，为了做到这个<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render(</div><div class="line">  &lt;Clock /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>我们需要添加<code>state</code>到clock这个组件中。</p>
+<p>state和props很像，但是它是更加独立而且完全由组件进行控制。</p>
+<p>####8 将一个函数转变成一个类<br>你可以使用以下五个步骤将 一个函数型组件转换成一个类：</p>
+<ol>
+<li>添加一个es6 class，用这同样的名字，但是使用一个扩展的React.Component</li>
+<li>添加一个空的方法，命名为render()</li>
+<li>将函数主题移到render()这个方法中</li>
+<li>在<code>render()</code>的主体中用<code>this.props</code>来取代<code>props</code></li>
+<li>把剩下的空的函数声明删除</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;h1&gt;Hello, world!&lt;/h1&gt;</div><div class="line">        &lt;h2&gt;It is &#123;this.props.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当它从function转换成class的时候我们就可以使用更多额外的特性，像是本地状态和生命周期钩子。（这里的翻译可能不是非常正确，我对于专有词汇的熟悉程度还是不够很深）</p>
+<h3 id="向一个类中添加本地状态"><a href="#向一个类中添加本地状态" class="headerlink" title="向一个类中添加本地状态"></a>向一个类中添加本地状态</h3><p>We will move the <code>date</code> from props to state in three steps:</p>
+<p>我们使用这三步将date从props转换成state：</p>
+<ol>
+<li><p>在<code>render()</code>这个方法中将<code>this.props.date</code>使用<code>this.state.date</code>代替。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;h2&gt;It is &#123;<span class="keyword">this</span>.state.date.toLocaleTimeString()&#125;.&lt;<span class="regexp">/h2&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加一个class constructor来设定最开始的初始<code>this.state</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;h1&gt;Hello, world!&lt;/h1&gt;</div><div class="line">        &lt;h2&gt;It is &#123;this.state.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在clock这个元素中将<code>date</code>这个prop移除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render(</div><div class="line">  &lt;Clock /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这是最后的结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;h1&gt;Hello, world!&lt;/h1&gt;</div><div class="line">        &lt;h2&gt;It is &#123;this.state.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Clock /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
+<p><small>上面的代码有些地方没有看得特别懂，大概实战以后会清楚很多吧。</small></p>
+<p>接下来，我们将让Clock设置自己的计时器，并且每秒中更新自己。（这里翻译的感觉奇奇怪怪的）））</p>
+<h3 id="添加生命循环方法到一个类上"><a href="#添加生命循环方法到一个类上" class="headerlink" title="添加生命循环方法到一个类上"></a>添加生命循环方法到一个类上</h3><p>当一个应用有很多组件的时候，当组件被销毁的时候就很有必要去释放一些资源。</p>
+<p>任何时候当<code>clock</code>第一次添加到DOM上的时候，我们想设置一个计时器。这在React中叫做mounting（已插入真实DOM）（我也不能准确地描述）<br>而在任何时候，当<code>clock</code>产生的DOM被移除的时候，我们同样想要移除这个计时器。这叫做unmounting（已移除真实DOM）</p>
+<p>我们可以在这些组件类上声明一些特殊的方法，可以用来在一个组件mount和unmount的时候运行代码。</p>
+<p>好像大概就是在class中加了两个方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  ...</div><div class="line"></div><div class="line">  componentDidMount()&#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentWillUnmount() &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些方法就叫做“生命周期钩子”</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/notes/" rel="tag"># notes</a>
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/04/汇编中有趣的寄存器初探/" rel="next" title="汇编中有趣的寄存器初探">
+                <i class="fa fa-chevron-left"></i> 汇编中有趣的寄存器初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/12/hexo下git部署时-deploy-报错/" rel="prev" title="hexo部署时的各类报错">
+                hexo部署时的各类报错 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="PetnaKanojo" />
+          <p class="site-author-name" itemprop="name">PetnaKanojo</p>
+          <p class="site-description motion-element" itemprop="description">永远温柔可爱</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染元素"><span class="nav-number">1.</span> <span class="nav-text">渲染元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接下来让我们更新这个渲染元素"><span class="nav-number">1.1.</span> <span class="nav-text">接下来让我们更新这个渲染元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#React只会更新那些需要更新的东西"><span class="nav-number">1.2.</span> <span class="nav-text">React只会更新那些需要更新的东西</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件和属性"><span class="nav-number">2.</span> <span class="nav-text">组件和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式和类元素"><span class="nav-number">2.1.</span> <span class="nav-text">函数式和类元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将组件组合起来"><span class="nav-number">2.2.</span> <span class="nav-text">将组件组合起来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分离组件"><span class="nav-number">2.3.</span> <span class="nav-text">分离组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#props是只读的"><span class="nav-number">2.4.</span> <span class="nav-text">props是只读的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态以及生命周期"><span class="nav-number">3.</span> <span class="nav-text">状态以及生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向一个类中添加本地状态"><span class="nav-number">4.</span> <span class="nav-text">向一个类中添加本地状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加生命循环方法到一个类上"><span class="nav-number">5.</span> <span class="nav-text">添加生命循环方法到一个类上</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PetnaKanojo</span>
+</div>
+
+
+<div class="powered-by">
+  Powerd by  <a class="theme-link" href="https://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+  <span>|&nbsp;  <a href="http://www.miitbeian.gov.cn/">  沪ICP备17003868号-1  </a></span>
+  <span id="busuanzi_container_site_uv">
+      |&nbsp;  view <span id="busuanzi_value_site_uv"></span> times
+  </span>
+
+
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <!--
+<script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+-->
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
