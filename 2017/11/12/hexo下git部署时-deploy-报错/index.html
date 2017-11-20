@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,git," />
+  <meta name="keywords" content="git,hexo," />
 
 
 
@@ -91,18 +91,18 @@
 
 
 
-<meta name="description" content="最近重新部署了一下hexo博客，换了一下主题，更新了一下配置，其他都很容易解决了，但是deploy的时候一直报错，所以记录一下，也希望能帮到你w">
-<meta name="keywords" content="hexo,git">
+<meta name="description" content="用来记录我碰到过的hexo比较奇奇怪怪的报错以及解决方法，也希望能帮到你w">
+<meta name="keywords" content="git,hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo部署时的各类报错">
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/11/12/hexo下git部署时-deploy-报错/index.html">
 <meta property="og:site_name" content="Welcome!">
-<meta property="og:description" content="最近重新部署了一下hexo博客，换了一下主题，更新了一下配置，其他都很容易解决了，但是deploy的时候一直报错，所以记录一下，也希望能帮到你w">
+<meta property="og:description" content="用来记录我碰到过的hexo比较奇奇怪怪的报错以及解决方法，也希望能帮到你w">
 <meta property="og:image" content="http://moe.petnakanojo.com/images/templateerror.png">
-<meta property="og:updated_time" content="2017-11-12T08:48:42.000Z">
+<meta property="og:updated_time" content="2017-11-12T08:52:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo部署时的各类报错">
-<meta name="twitter:description" content="最近重新部署了一下hexo博客，换了一下主题，更新了一下配置，其他都很容易解决了，但是deploy的时候一直报错，所以记录一下，也希望能帮到你w">
+<meta name="twitter:description" content="用来记录我碰到过的hexo比较奇奇怪怪的报错以及解决方法，也希望能帮到你w">
 <meta name="twitter:image" content="http://moe.petnakanojo.com/images/templateerror.png">
 
 
@@ -365,12 +365,12 @@
       
 
       
-        <p>最近重新部署了一下hexo博客，换了一下主题，更新了一下配置，其他都很容易解决了，但是deploy的时候一直报错，所以记录一下，也希望能帮到你w</p>
+        <p>用来记录我碰到过的hexo比较奇奇怪怪的报错以及解决方法，也希望能帮到你w</p>
 <a id="more"></a>
-<h2 id="Not-a-Git-Repository"><a href="#Not-a-Git-Repository" class="headerlink" title="Not a Git Repository"></a>Not a Git Repository</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal: Not a git repository (or any of the parent directories): .git</div></pre></td></tr></table></figure>
+<h3 id="Not-a-Git-Repository"><a href="#Not-a-Git-Repository" class="headerlink" title="Not a Git Repository"></a>Not a Git Repository</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal: Not a git repository (or any of the parent directories): .git</div></pre></td></tr></table></figure>
 <p>大概是这样报错的。</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>删掉根目录下的文件夹：.deploy_git</p>
-<h2 id="Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed"><a href="#Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed" class="headerlink" title="Pushing to Git returning Error Code 403 fatal: HTTP request failed"></a>Pushing to Git returning Error Code 403 fatal: HTTP request failed</h2><p>刚刚解决<code>not a git repo</code>的问题，结果还是不能deploy，这个的原因是因为我本地git认证是用ssh的，但是<code>hexo</code>根目录下的<code>_config.yml</code>里我是这样写的：</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>删掉根目录下的文件夹：.deploy_git</p>
+<h3 id="Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed"><a href="#Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed" class="headerlink" title="Pushing to Git returning Error Code 403 fatal: HTTP request failed"></a>Pushing to Git returning Error Code 403 fatal: HTTP request failed</h3><p>刚刚解决<code>not a git repo</code>的问题，结果还是不能deploy，这个的原因是因为我本地git认证是用ssh的，但是<code>hexo</code>根目录下的<code>_config.yml</code>里我是这样写的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repository:https://github.com/username/username.github.io</div><div class="line">branch: master••••••••</div></pre></td></tr></table></figure>
 <p>将https连接改为ssh连接即可：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repository:git@github.com:username/username.github.io</div><div class="line">branch: master••••••••</div></pre></td></tr></table></figure>
@@ -407,9 +407,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
             <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
           
         </div>
       
@@ -427,6 +427,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/简单的服务器建站记录/" rel="prev" title="简单的服务器建站记录">
+                简单的服务器建站记录 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -496,7 +500,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -514,7 +518,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -556,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Not-a-Git-Repository"><span class="nav-number">1.</span> <span class="nav-text">Not a Git Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">1.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed"><span class="nav-number">2.</span> <span class="nav-text">Pushing to Git returning Error Code 403 fatal: HTTP request failed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#template-render-Error"><span class="nav-number">2.1.</span> <span class="nav-text">template render Error</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not-a-Git-Repository"><span class="nav-number">1.</span> <span class="nav-text">Not a Git Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">1.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pushing-to-Git-returning-Error-Code-403-fatal-HTTP-request-failed"><span class="nav-number">2.</span> <span class="nav-text">Pushing to Git returning Error Code 403 fatal: HTTP request failed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#template-render-Error"><span class="nav-number">3.</span> <span class="nav-text">template render Error</span></a></li></ol></div>
             
 
           </div>
