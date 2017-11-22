@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/11/20/简单的服务器建站记录/index.html">
 <meta property="og:site_name" content="Welcome!">
 <meta property="og:description" content="这篇博客是很久以前写的了，在自己的unfinished文件夹中，emmm先推出来吧，之后有需要增加的再继续添加好啦～">
-<meta property="og:updated_time" content="2017-11-20T04:58:17.000Z">
+<meta property="og:updated_time" content="2017-11-20T05:02:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的服务器建站记录">
 <meta name="twitter:description" content="这篇博客是很久以前写的了，在自己的unfinished文件夹中，emmm先推出来吧，之后有需要增加的再继续添加好啦～">
@@ -373,9 +373,8 @@
 <p>域名和空间没有必然联系，域名的作用就是作为一个字符串映射到一个IP地址上，因为（１）IP地址比较难记，（２）IP地址数量有限（同一个IP可以放ｎ个域名）</p>
 <h3 id="二-关于网站的配置"><a href="#二-关于网站的配置" class="headerlink" title="二　关于网站的配置"></a>二　关于网站的配置</h3><h4 id="1-域名的设置"><a href="#1-域名的设置" class="headerlink" title="1.域名的设置"></a>1.域名的设置</h4><ul>
 <li><p>域名服务器（name server）：通常是ns*.***.***之类的网址，这个服务器负责解析下面的各种设置，也就是说，它是域名各项设置的Boss。国内一些域名注册商通常以这一点为手段，卡住用户，比如限制你只能使用它的域名服务器，然后再限制你最多只能设置10项A记录或MX记录等，多了要另外收费，这种规矩实在是很扯淡；尤其是对于那些需要多个子域名的用户，这一点很不方便，国外情况好一些，至少我还没见过有哪家限制你使用特定域名服务器的；</p>
-<ul>
-<li>要特别提及的一点是，有些空间服务商只需要你把域名服务器设置为他们的域名服务器，剩下的所有解析问题你基本上都不用管了，你可以自由创建子域名，而不必添加A记录</li>
-</ul>
+</li>
+<li><p>要特别提及的一点是，有些空间服务商只需要你把域名服务器设置为他们的域名服务器，剩下的所有解析问题你基本上都不用管了，你可以自由创建子域名，而不必添加A记录</p>
 </li>
 </ul>
 <h5 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h5><ul>
@@ -414,7 +413,7 @@
 <h4 id="（１）用FTP传输网页文件"><a href="#（１）用FTP传输网页文件" class="headerlink" title="（１）用FTP传输网页文件"></a>（１）用FTP传输网页文件</h4><p>FTP就是用来传文件到某一台服务器的，只要你购买了虚拟主机服务，一般就会给你一个FTP帐号，你可以利用这个帐号登录你的主机，把网页文件传上去，然后用户就可以访问了。一点常识是，index.htm/index.php之类的网页文件通常是你在访问一个目录时主机会自动为你查找的文件，比如你访问yihui.name，主机会自动查找有没有index.php，如果有，就执行这个文件，生成HTML给你的浏览器。这个文件的文件名也许是可以配置的，但建议不要在这上面特立独行。</p>
 <p>现在有很多成熟的建站系统，从网上下载下来然后传到服务器上，访问你的网址，按照提示一步步配置即可，跟装软件没两样。</p>
 <h4 id="（2）网站数据库"><a href="#（2）网站数据库" class="headerlink" title="（2）网站数据库"></a>（2）网站数据库</h4><p>动态网站大多数需要数据库（即使是文本文件“数据库”），如果你的网站用PHP语言，那么MySQL就是绝配了。若是PHP+MySQL空间（一般Linux主机都是这样），主机服务商会给你分配MySQL数据库帐号，包括：数据库主机（多为localhost）、数据库名、用户名、密码。这四项将会在你安装网页程序的过程中要求你填写。</p>
-<h3 id="三、网站的运行"><a href="#三、网站的运行" class="headerlink" title="三、网站的运行"></a>三、网站的运行</h3><p>对于那些程序员来说，第一个例子通常都是hello world，如果你愿意看hello world的话，就把“hello world”用任何文本编辑工具写在一个文本文件中，命名为index.htm，传到网站根目录下，然后访问你的网站，你就能欣喜地看到这个老得不能再老的hello world了。</p>
+<h3 id="三、网站的运行"><a href="#三、网站的运行" class="headerlink" title="三、网站的运行"></a>三、网站的运行</h3><p>对于那些程序员来说，第一个例子通常都是hello world，如果你愿意看hello world的话，就把“hello world”用任何文本编辑工具写在一个文本文件中，命名为index.html，传到网站根目录下，然后访问你的网站，你就能欣喜地看到这个老得不能再老的hello world了。</p>
 <p>一个像样的网站当然不是hello world这么简单，它的运行就像一个复杂的程序，可能存在文件之间的函数调用以及数据库的存取等等。世上真正开发网站程序的人肯定是少数，所以不用担心，你就用别人的程序吧，典型的网站系统有：</p>
 <ul>
 <li>博客系统（Blog）：推荐WordPress，理由是程序写得简洁，扩展性强，我以前用国产的Bo-blog系统，后来没经得住诱惑投奔WP了</li>
@@ -472,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/22/简单理解React中的state/" rel="prev" title="简单理解React中的state">
+                简单理解React中的state <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -541,7 +544,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
