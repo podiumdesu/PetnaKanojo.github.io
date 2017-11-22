@@ -367,45 +367,14 @@
 
       
         
-          
-            <p>一点点记录，建议需要学习React的移步官方文档去学习。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);   <span class="comment">//1.2构造函数中有个对象，对this.state进行初始化</span></div><div class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentDidMount() &#123;   <span class="comment">//3.1 当clock被插入到dom中的时候，就开始调用这个生命循环钩子了    </span></div><div class="line">    <span class="keyword">this</span>.timerID = setInterval(   <span class="comment">//3.2这里的钩子是生成了一个计时器，让浏览器定时调用this.tick()函数。</span></div><div class="line">      () =&gt; <span class="keyword">this</span>.tick(),   <span class="comment">//这里疯狂调用tick()函数，然后进行对自身的刷新？？</span></div><div class="line">      <span class="number">1000</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentWillUnmount() &#123;    <span class="comment">//5.1 当clock这个组件不在dom中的时候就调用这个方法。</span></div><div class="line">    clearInterval(<span class="keyword">this</span>.timerID);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  tick() &#123;     <span class="comment">//4.1 这里调用tick()，这个函数就是用来设置setState，这里面包含了一个现在时间的对象，然后调用render()，进行更新，如果有改变会进行修改。</span></div><div class="line">    <span class="keyword">this</span>.setState(&#123;     </div><div class="line">      <span class="comment">//使用this.setStete()将更新定制schedule到（？？这里的翻译究竟为什么这么奇怪呢）组件当前的状态中</span></div><div class="line">      date: <span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;    <span class="comment">//2.1 使用render进行渲染</span></div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>It is &#123;this.state.date.toLocaleTimeString()&#125;.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">Clock</span> /&gt;</span>,     //1.1 先去找构造函数</span></div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>让我们重新简要概述一下整个过程发生了什么以及这些方法被调用的顺序吧：</p>
-<ol>
-<li>当<code>&lt;Clock /&gt;</code>传递到<code>React.DOM.render()</code>的时候，React会去寻找<code>&lt;Clock /&gt;</code>这个组件的构造函数(constructor)。既然<code>Clock</code>需要显示现在的时间，它会用一个包含了现在时间的对象(object)初始化<code>this.state</code>，我们之后会更新这个state。</li>
-<li>React之后会调用<code>Clock</code>这个组件的<code>render()</code>方法。就是通过这样React知道应该将什么渲染到屏幕上。React之后会更新DOM来匹配<code>Clock</code>的渲染输出。</li>
-<li>当<code>Clock</code>的输入被插入到DOM之后，React会调用<code>componentDidMount</code>这个生命循环钩子。在这个钩子中，<code>Clock</code>组件会要求浏览器创建一个计时器，让它每秒去调用这个组件的<code>tick()</code>方法。</li>
-<li>之后每秒这个浏览器会调用<code>tick()</code>这个方法，在这其中，这个<code>Clock</code>组件会安排一个UI组件更新，这是通过调用<code>setState()</code>来实现的（它会又一个包含了现在时间的对象）。就是通过这个调用，然后才知道状态是如何改变的，然后就会再调用<code>render()</code>这个方法来知道现在到底应该显示什么在屏幕上。就是因为每次的<code>this.state.time</code>在<code>render()</code>这个方法中都是不同的，所以在渲染结果中会包含这个新更新的时间。然后React就会相应地更新这个DOM。</li>
-<li>如果之后<code>Clock</code>组件从DOM中移除，React就会调用<code>componentWillUnmount</code>这个生命循环钩子，然后这个计时器就停止了。</li>
-</ol>
-<p>（感觉官方文档上这一块讲的还是非常清楚的）</p>
-<h4 id="如何正确使用state呢"><a href="#如何正确使用state呢" class="headerlink" title="如何正确使用state呢"></a>如何正确使用state呢</h4><ol>
-<li><em>不要直接修改状态this.state</em>，一定是需要写在对this.setState({})对象中的。<br>你唯一可以指定this.state的地方就是在构造函数(constructor)中。</li>
-</ol>
-<blockquote>
-<p>//wrong<br>this.state.comment = ‘Hello’;<br>//correct<br>this.setState({comment: ‘hello’});</p>
-</blockquote>
-<ol>
-<li><em>状态的改变应该是异步的</em>。因为为了显示效果，每次更新的时候，React是分批处理多个<code>setState()</code>的调用的。因为<code>this.props</code>和<code>this.state</code>可能更新的时候是异步的。计算下一个状态的时候不应该通过依赖它们的值进行改变。</li>
-</ol>
-<blockquote>
-<p>//wrong<br>this.setState({<br>  counter: this.state.counter + this.props.increment,<br>})<br>correct<br>this.setState((prevState, props) =&gt; ({<br>  counter: prevState.counter + props.increment<br>}));</p>
-</blockquote>
-<ol>
-<li><em>状态的更新是合并的</em>。当你调用<code>setState</code>的时候，React会合并你提供的对象到当前的state中。但是也要知道这个合并是浅合并，就是当你调用<code>this.setState({comments})</code>的时候并不会对<code>this.state.posts</code>进行修改，只会替代<code>this.state.comments</code>。</li>
-</ol>
-<p>就像这样，你的state中可以包含几种独立的变量：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(props) &#123;</div><div class="line">  <span class="keyword">super</span>(props);</div><div class="line">  <span class="keyword">this</span>.state = &#123;</div><div class="line">    <span class="attr">posts</span>: [],</div><div class="line">    <span class="attr">comments</span>: []</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后通过分别使用不同的setState()进行修改：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">componentDidMount() &#123;</div><div class="line">  fetchPosts().then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">      <span class="attr">posts</span>: response.posts</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">  fetchComments().then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">      <span class="attr">comments</span>: response.comments</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="向下的数据流"><a href="#向下的数据流" class="headerlink" title="向下的数据流"></a>向下的数据流</h4><p>（这里我的理解好像是大家都是独立的组件，互相之间应该是互不干扰的，这就是状态经常被认为是本地的或者是概述的的原因。除非你拥有并且设置它，否则你不可以接触任何一个组件。）</p>
-<p>一个组件可以选择将它的状态以props的形式向下传递给它的子组件。</p>
-<p>就像是可以这样写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;h2&gt; It is &#123;<span class="keyword">this</span>.state.date.toLocaleTimeString()&#125;.&lt;<span class="regexp">/h2&gt;</span></div></pre></td></tr></table></figure></p>
-<p>但是也可以用用户自己定义的一个组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormattedDate date=&#123;<span class="keyword">this</span>.state.date&#125; /&gt;</div></pre></td></tr></table></figure></p>
-<p>然后这个<code>FormattedDate</code>组件就接收<code>date</code>作为它的props，而且对于这个函数来说，它不知道这个参数来自于<code>Clock</code>的state，或是<code>Clock</code>的props，或者是手动输入的参数值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FormattedDate</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>It is &#123;props.date.toLocaleTimeString()&#125;.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>（但是不清楚将这个参数继续传递下去的用处是什么）</p>
-<p>这就是一个数据流，只能影响接下来(below)的那些组件。你可以想象一棵“组件树”，就像是props的瀑布一样，每个组件的state都像是添加进去的新的水资源，虽然是非常任意(arbitrary)，但是仍然是向下流动的。</p>
-<p>反正就是只要记住各个组件之间运行的时候都是互不影响的啦～</p>
-
-          
+          <p>一点点记录，建议需要学习React的移步官方文档去学习。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/22/简单理解React中的state/#more" rel="contents">
+              点进去可以看到更多哦w &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
