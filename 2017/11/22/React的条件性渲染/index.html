@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="react,notes," />
 
 
 
@@ -92,12 +92,13 @@
 
 
 <meta name="description" content="一点点记录，建议需要学习React的移步官方文档去学习。">
+<meta name="keywords" content="react,notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React的条件性渲染">
 <meta property="og:url" content="http://moe.petnakanojo.com/2017/11/22/React的条件性渲染/index.html">
 <meta property="og:site_name" content="Welcome!">
 <meta property="og:description" content="一点点记录，建议需要学习React的移步官方文档去学习。">
-<meta property="og:updated_time" content="2017-11-22T13:08:04.000Z">
+<meta property="og:updated_time" content="2017-11-23T06:49:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React的条件性渲染">
 <meta name="twitter:description" content="一点点记录，建议需要学习React的移步官方文档去学习。">
@@ -315,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -348,11 +371,14 @@
 <p>React中的条件型渲染跟JavaScript中的条件运算符运行方式差不多。好像就是使用JavaScript中的<code>if</code>或者三元运算符创建元素来显示现在的状态，然后让React更新UI来匹配这些修改。</p>
 <p>下面这个例子就是根据不同的<code>isLoggedIn</code>进行不同的欢迎。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Greeting</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> isLoggedIn = props.isLoggedIn;</div><div class="line">  <span class="keyword">if</span> (isLoggedIn) &#123;</div><div class="line">    <span class="keyword">return</span> &lt;UserGreeting /&gt;;</div><div class="line">  &#125;</div><div class="line">  return &lt;GuestGreeting /&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  // Try changing to isLoggedIn=&#123;true&#125;:</div><div class="line">  &lt;Greeting isLoggedIn=&#123;false&#125; /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure></p>
 <h4 id="元素变量-element-variables"><a href="#元素变量-element-variables" class="headerlink" title="元素变量(element variables)"></a>元素变量(element variables)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginControl</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.handleLoginClick = <span class="keyword">this</span>.handleLoginClick.bind(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">this</span>.handleLogoutClick = <span class="keyword">this</span>.handleLogoutClick.bind(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">isLoggedIn</span>: <span class="literal">false</span>&#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleLoginClick() &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">isLoggedIn</span>: <span class="literal">true</span>&#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleLogoutClick() &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">isLoggedIn</span>: <span class="literal">false</span>&#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">const</span> isLoggedIn = <span class="keyword">this</span>.state.isLoggedIn;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> button = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">if</span> (isLoggedIn) &#123;    <span class="comment">//这里根据不同的值对button进行赋值</span></div><div class="line">      button = &lt;LogoutButton onClick=&#123;this.handleLogoutClick&#125; /&gt;;</div><div class="line">    &#125; else &#123;   </div><div class="line">      button = &lt;LoginButton onClick=&#123;this.handleLoginClick&#125; /&gt;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return (</div><div class="line">      &lt;div&gt;</div><div class="line">        &lt;Greeting isLoggedIn=&#123;isLoggedIn&#125; /&gt;</div><div class="line">        &#123;button&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;LoginControl /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>如果你觉得上述的代码非常的冗长，React有更短的哦<br>1.inline if with logical &amp;&amp; Operator（这个地方我不会翻译）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Mailbox</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> unreadMessages = props.unreadMessages;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;h1&gt;Hello!&lt;/h1&gt;</div><div class="line">      //就在下面这里</div><div class="line">      &#123;unreadMessages.length &gt; 0 &amp;&amp;</div><div class="line">        &lt;h2&gt;</div><div class="line">          You have &#123;unreadMessages.length&#125; unread messages.</div><div class="line">        &lt;/h2&gt;</div><div class="line">      &#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> messages = [<span class="string">'React'</span>, <span class="string">'Re: React'</span>, <span class="string">'Re:Re: React'</span>];</div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Mailbox unreadMessages=&#123;messages&#125; /&gt;,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>如果你觉得上述的代码非常的冗长，React有更短的哦<br>1.inline if with logical &amp;&amp; Operator（这个地方我不会翻译）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Mailbox</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> unreadMessages = props.unreadMessages;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">      //就在下面这里</div><div class="line">      &#123;unreadMessages.length &gt; 0 &amp;&amp;</div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span></div><div class="line">          You have &#123;unreadMessages.length&#125; unread messages.</div><div class="line">        <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">      &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> messages = [<span class="string">'React'</span>, <span class="string">'Re: React'</span>, <span class="string">'Re:Re: React'</span>];</div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">Mailbox</span> <span class="attr">unreadMessages</span>=<span class="string">&#123;messages&#125;</span> /&gt;</span>,</span></div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure></p>
 <p>这个的意思就是使用了 <code>true &amp;&amp; 表达式</code>，如果是<code>false &amp;&amp;</code>的话就相当于false。</p>
 <p>因此当表达式是<code>true</code>的时候，这个紧跟<code>&amp;&amp;</code>的元素就会在输出结果中显示，否则React就忽视并跳过它。</p>
-<p>2.这种方式就是使用JavaScript中的三元运算符<code>condition? true : false</code>，下面的例子中我们使用这个来进行条件性地渲染一小块的文本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">const</span> isLoggedIn = <span class="keyword">this</span>.state.isLoggedIn;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      The user is &lt;b&gt;&#123;isLoggedIn ? 'currently' : 'not'&#125;&lt;/b&gt; logged in.</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.这种方式就是使用JavaScript中的三元运算符<code>condition? true : false</code>，下面的例子中我们使用这个来进行条件性地渲染一小块的文本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">const</span> isLoggedIn = <span class="keyword">this</span>.state.isLoggedIn;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">      The user is <span class="tag">&lt;<span class="name">b</span>&gt;</span>&#123;isLoggedIn ? 'currently' : 'not'&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span> logged in.</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>当然你也可以这么复杂地写:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">const</span> isLoggedIn = <span class="keyword">this</span>.state.isLoggedIn;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &#123;isLoggedIn ? (</div><div class="line">        &lt;LogoutButton onClick=&#123;this.handleLogoutClick&#125; /&gt;</div><div class="line">      ) : (</div><div class="line">        &lt;LoginButton onClick=&#123;this.handleLoginClick&#125; /&gt;</div><div class="line">      )&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这一切都是取决于你和你的码友觉得哪种方式更加易读吧，但是当判断表达式非常多的时候，请注意学会拆分组件！！！</p>
+<h4 id="不让组件渲染"><a href="#不让组件渲染" class="headerlink" title="不让组件渲染"></a>不让组件渲染</h4><p>当你在某些情况下不想让组件渲染的时候，请使用<code>return null</code>这样就可以隐藏它啦<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">WarningBanner</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="comment">// WarningBanner这个组件渲染与否取决于props.warn的值</span></div><div class="line">  <span class="keyword">if</span> (!props.warn) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"warning"</span>&gt;</span></span></div><div class="line">      Warning!</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Page</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">showWarning</span>: <span class="literal">true</span>&#125;</div><div class="line">    <span class="keyword">this</span>.handleToggleClick = <span class="keyword">this</span>.handleToggleClick.bind(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleToggleClick() &#123;</div><div class="line">    <span class="keyword">this</span>.setState(<span class="function"><span class="params">prevState</span> =&gt;</span> (&#123;</div><div class="line">      <span class="attr">showWarning</span>: !prevState.showWarning</div><div class="line">    &#125;));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">WarningBanner</span> <span class="attr">warn</span>=<span class="string">&#123;this.state.showWarning&#125;</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleToggleClick&#125;</span>&gt;</span></div><div class="line">          &#123;this.state.showWarning ? 'Hide' : 'Show'&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="tag">&lt;<span class="name">Page</span> /&gt;</span>,</div><div class="line">  document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>当从组件的<code>render()</code>中返回<code>null</code>的时候，是不会影响组件的生命循环方法的。这就意味着<code>componentDidMount</code>和<code>componentWillUnmount</code>方法仍然是会被调用的哦。</p>
 
       
     </div>
@@ -374,6 +400,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/notes/" rel="tag"># notes</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -388,6 +422,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/23/React中的List和keys/" rel="prev" title="React中的List和keys">
+                React中的List和keys <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +495,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -517,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#元素变量-element-variables"><span class="nav-number">1.</span> <span class="nav-text">元素变量(element variables)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#元素变量-element-variables"><span class="nav-number">1.</span> <span class="nav-text">元素变量(element variables)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不让组件渲染"><span class="nav-number">2.</span> <span class="nav-text">不让组件渲染</span></a></li></ol></div>
             
 
           </div>
