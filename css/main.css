@@ -1829,7 +1829,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b4558b;
+  background: #f9ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2940,7 +2940,7 @@ div.perpic:hover p {
 .personbar {
   margin-botton: 50px;
 }
-.perpic img {
+.perpic img.avatar-img {
   padding: 0;
 }
 .perpic a {
