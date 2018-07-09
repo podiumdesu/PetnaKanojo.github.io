@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicion.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,context,bind," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Welcome!" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一点点关于作用域、bind、call/apply、this的介绍">
+<meta name="keywords" content="JavaScript,context,bind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析JavaScript - 作用域和执行上下文">
+<meta property="og:url" content="http://moe.petnakanojo.com/2018/07/09/浅析JavaScript-作用域和执行上下文/index.html">
+<meta property="og:site_name" content="Welcome!">
+<meta property="og:description" content="一点点关于作用域、bind、call/apply、this的介绍">
+<meta property="og:updated_time" content="2018-07-09T12:07:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析JavaScript - 作用域和执行上下文">
+<meta name="twitter:description" content="一点点关于作用域、bind、call/apply、this的介绍">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"slideUpIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://moe.petnakanojo.com/2018/07/09/浅析JavaScript-作用域和执行上下文/"/>
+
+
+
+
+
+  <title>浅析JavaScript - 作用域和执行上下文 | Welcome!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Welcome!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">PetnaKanojo's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-apostil">
+          <a href="/apostil" rel="section">
+            
+            札记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friendlinks">
+          <a href="/friendlinks" rel="section">
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+            小工具
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://moe.petnakanojo.com/2018/07/09/浅析JavaScript-作用域和执行上下文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PetnaKanojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅析JavaScript - 作用域和执行上下文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-09T20:05:00+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,867字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一点点关于作用域、bind、call/apply、this的介绍</p>
+<a id="more"></a>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><ul>
+<li><a href="https://www.cnblogs.com/coco1s/p/4833199.html" target="_blank" rel="external">ChokCoco - 【优雅代码】深入浅出 妙用Javascript中apply、call、bind</a></li>
+</ul>
+<h2 id="作用域是什么"><a href="#作用域是什么" class="headerlink" title="作用域是什么"></a>作用域是什么</h2><p>如果一个变量在函数体内部申明，则变量的作用域为整个函数体，在函数体外不可以引用</p>
+<p>先针对ES5（无const / let），以var申明的变量的作用域就是当前执行上下文</p>
+<h3 id="函数体内作用域"><a href="#函数体内作用域" class="headerlink" title="函数体内作用域"></a>函数体内作用域</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = <span class="number">1</span></div><div class="line">  x = x + <span class="number">1</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">x = x + <span class="number">2</span>   <span class="comment">// ReferenceError: x is not defined</span></div></pre></td></tr></table></figure>
+<p>不同函数内部的同名变量互相不冲突</p>
+<h3 id="函数嵌套，内部函数可访问外部函数定义变量"><a href="#函数嵌套，内部函数可访问外部函数定义变量" class="headerlink" title="函数嵌套，内部函数可访问外部函数定义变量"></a>函数嵌套，内部函数可访问外部函数定义变量</h3><p>JS中函数可以嵌套，此时，内部函数可以访问外部函数定义的变量。</p>
+<p>其实就是一个 <strong>作用域链</strong> 的概念</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> color = <span class="string">'blue'</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">text1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> anotherColor = <span class="string">'red'</span>;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">text2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> tempCplor = anotherColor;</div><div class="line">        anotherColor = color;</div><div class="line">        <span class="comment">//这里可以访问到color、anotherColor和tempColor</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//这里可以访问color和anotherColor,但不能访问到tempColor</span></div><div class="line">    text2();</div><div class="line">&#125;</div><div class="line"><span class="comment">//这里只能访问到color</span></div></pre></td></tr></table></figure>
+<h3 id="变量屏蔽"><a href="#变量屏蔽" class="headerlink" title="变量屏蔽"></a>变量屏蔽</h3><p>JS函数查找变量时从自身函数定义开始，如果内部函数定义了与外部函数重名的变量，则内部函数的变量将“屏蔽”外部函数的变量</p>
+<h3 id="变量生存周期"><a href="#变量生存周期" class="headerlink" title="变量生存周期"></a>变量生存周期</h3><p>1.全局变量的生存周期是永久的，除非我们主动销毁。</p>
+<p>ps：变量永久生存，且可以随时调用，但是使用的时候要适度，正是因为它的生命周期长，所以将占据更多的内存，如果声明的变量都是全局变量，当项目比较大的时候，就可能出现性能问题,养成一个好的习惯还是有必要的。</p>
+<p>2.而对于在函数内用 var 关键字声明的局部变量来说,当退出函数时,这些局部变量即失去了它们的价值,它们都会随着函数的调用的结束而销毁。</p>
+<p>ps：调用函数结束，局部变量确实会销毁。但并不是完全销毁，而是一直函数的内部环境中存活着，当函数再度被调用时，变量就“复活”了，所以局部变量还是非常方便的，不会影响二次使用。</p>
+<h3 id="变量重名"><a href="#变量重名" class="headerlink" title="变量重名"></a>变量重名</h3><p>var重名<br>    1: 同一个作用域,两个var,只需要var一个就好<br>函数重名<br>    1: 同一个大作用域下,函数定义多个时,后面的函数覆盖前面的<br>函数和变量同时重名<br>    1: 以函数为准(实际上不允许重名)</p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p></p><p stype="color: red">注意：变量只是将定义提升，不会报错，但是仍然是undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = <span class="string">'Hello '</span> + y</div><div class="line">  <span class="built_in">console</span>.log(x)</div><div class="line">  <span class="keyword">var</span> y = <span class="string">'world'</span></div><div class="line">&#125;</div><div class="line">foo()</div><div class="line"></div><div class="line"><span class="comment">// 输出 Hello undefined</span></div></pre></td></tr></table></figure>
+<p>对于上述代码，浏览器看到的代码其实是<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y </div><div class="line">  <span class="keyword">var</span> x = <span class="string">'Hello '</span> + y</div><div class="line">  <span class="built_in">console</span>.log(x)</div><div class="line">  <span class="keyword">var</span> y = <span class="string">'world'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>请遵守 “在函数内部首先申明所有变量” 这一规定</p>
+</blockquote>
+<p>函数申明和变量申明总是会被移动到它们所在的作用域的顶部。而变量的解析顺序（优先级），与变量进入作用域的4种方式的顺序一致。</p>
+<blockquote>
+<p>补：变量解析顺序<br>先执行定义式函数<code>function f() {}</code> 再按照代码顺序执行变量式函数（匿名函数）<code>let f = function() {}</code>，函数的优先级高于变量。</p>
+</blockquote>
+<p>看个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testOrder</span>(<span class="params">arg</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// arg是形参，不会被重新定义</span></div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 因为函数声明比变量声明优先级高，所以这里a是函数</span></div><div class="line">    <span class="keyword">var</span> arg = <span class="string">'hello'</span>; <span class="comment">// var arg;变量声明被忽略， arg = 'hello'被执行</span></div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span>; <span class="comment">// var a;被忽视; a = 10被执行，a变成number</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'fun'</span>);</div><div class="line">    &#125; <span class="comment">// 被提升到作用域顶部</span></div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 输出10</span></div><div class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// 输出hello</span></div><div class="line">&#125;; </div><div class="line">testOrder(<span class="string">'hi'</span>);</div><div class="line"><span class="comment">/* 输出：</span></div><div class="line">hi </div><div class="line">function a() &#123;</div><div class="line">        console.log('fun');</div><div class="line">    &#125;</div><div class="line">10 </div><div class="line">hello </div><div class="line">*/</div></pre></td></tr></table></figure></p>
+<h2 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h2><p>不在任何函数内定义的变量就具有全局作用域，实际上是被绑定到 <strong>window</strong> 的一个属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">'ddd'</span></div><div class="line"><span class="built_in">console</span>.log(a)  <span class="comment">//ddd</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.a)  <span class="comment">//ddd</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</div><div class="line">&#125;</div><div class="line">foo()    <span class="comment">// foo</span></div><div class="line"><span class="built_in">window</span>.foo()   <span class="comment">// foo</span></div></pre></td></tr></table></figure>
+<p>任何变量（函数也视为变量）如果没有在当前函数作用域中找到，就会继续往上查找，如果最后在全局作用域中也没有找到，就会报错。</p>
+<h4 id="命名冲突"><a href="#命名冲突" class="headerlink" title="命名冲突"></a>命名冲突</h4><p>全局变量会绑定到 <strong>window</strong> 上，不同的JS文件中如果使用相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突。 减少冲突的方法是 <strong>把自己的所有变量和函数全部绑定到一个全局变量中</strong> 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 唯一的全局变量</span></div><div class="line"><span class="keyword">var</span> MYAPP = &#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//其他变量</span></div><div class="line">MYAPP.name = <span class="string">'ddd'</span> </div><div class="line">MYAPP.version = <span class="number">1.0</span></div><div class="line"></div><div class="line">MYAPP.foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="局部作用域"><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h2><p>JS中的变量作用域实际上是函数内部，（ES5中）在for循环中是无法定义具有局部作用域的变量的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  i += <span class="number">1</span>   <span class="comment">// 11</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>在ES6中有了 <strong>let</strong> ，可以代替var申明一个块级作用域的变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  i += <span class="number">1</span>   <span class="comment">// ReferenceError: i is not defined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>const也具有块级作用域，同时可以用于申明一个常量。（注：对const申明的常量重新赋值时，某些浏览器可能不报错，但是无效果）</p>
+<h2 id="妙用apply-bind-call"><a href="#妙用apply-bind-call" class="headerlink" title="妙用apply, bind, call"></a>妙用apply, bind, call</h2><p>既然提到了作用域，就继续提下去，几个有关于 call，apply，bind（它们其实就是为了改变函数体内部this的指向）</p>
+<p>关于这三者的介绍直接指路<a href="https://www.cnblogs.com/coco1s/p/4833199.html" target="_blank" rel="external">这篇博客</a></p>
+<h3 id="apply-amp-call"><a href="#apply-amp-call" class="headerlink" title="apply &amp; call"></a>apply &amp; call</h3><p>这两个方法非常类似，主要区别就在于传参的形式有所区别而已。</p>
+<blockquote>
+<p>apply()<br>传入两个参数：一个 <strong>作为函数上下文的对象</strong> ，另一个作为函数参数所组成的数组</p>
+<p>call()<br>传入两个参数：一个 <strong>作为函数上下文的对象</strong> ，后面传入一个参数列表，而不是单个参数（表示改变后调用这个函数的对象）</p>
+</blockquote>
+<p>何时使用：当参数本身就存放在数组中的时候，使用apply()，当参数比较杂乱，使用call()</p>
+<p>请说三遍，第一个参数是指作为函数上下文的对象，第一个参数是指作为函数上下文的对象，第一个参数是指作为函数上下文的对象。</p>
+<p>然后举几个用法：</p>
+<ul>
+<li>改变this指向</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'petnakanojo'</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line">sayName.call(person)   <span class="comment">// 第一个参数是指作为函数上下文的对象</span></div><div class="line"></div><div class="line"><span class="comment">// 那么输出就应该是 petnakanojo</span></div></pre></td></tr></table></figure>
+<p>所以，可以看出call和apply是为了动态改变this而出现的，当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作。</p>
+<ul>
+<li>借用别的对象的方法（其实算是继承）</li>
+</ul>
+<p>再看一个栗子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> personA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.name = <span class="string">'Alice'</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'This is a test'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> personB = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.callName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">  &#125;</div><div class="line">  personA.call(<span class="keyword">this</span>)   <span class="comment">// 在personB的执行环境里执行personA的属性和方法</span></div><div class="line">  <span class="comment">// 这里其实算是执行了一次继承</span></div><div class="line">  <span class="comment">// 意思是把personA的方法应用到personB这个对象上。</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> newPerson = <span class="keyword">new</span> personB()   <span class="comment">//This is a test</span></div><div class="line"><span class="comment">// 上一行中，在创建一个新的personB的实例的时候，`personA.call(this)`这句话也立刻执行</span></div><div class="line"></div><div class="line">newPerson.callName()  <span class="comment">// Alice</span></div></pre></td></tr></table></figure></p>
+<p>仍然记着：第一个参数是指 <strong>作为函数上下文的对象</strong>。</p>
+<p>那么对于<code>personA.call(this)</code>这句，再根据<code>当创建一个新的personB实例的时候，浏览器console中会输出“this is a test”</code>就比较容易理解了。</p>
+<p>其实这句就是将personA的this指向了personB的this。</p>
+<p>此处需要理解的是有关于JS中的函数调用的概念。<br><a href="http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html</a></p>
+<p>建议阅读👍👍👍<a href="http://bonsaiden.github.io/JavaScript-Garden/#function.this" target="_blank" rel="external">How this Works</a>，以下四种调用方式在这篇博客中都有提到。</p>
+<p>this在四种调用模式下，分别会绑定不同的值。</p>
+<ol>
+<li><p>方法调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;</div><div class="line">    <span class="attr">v</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">f</span> : <span class="function"><span class="keyword">function</span>(<span class="params">xx</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.v = xx;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">a.f(<span class="number">5</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>正常函数调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">xx</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.x = xx</div><div class="line">&#125;</div><div class="line">f(<span class="number">5</span>)</div><div class="line"><span class="comment">// 注意函数f里的this绑定的是全局对象。this.x访问的其实是window.x</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>对于上述方法1和方法2的设计原理，请参看阮一峰的博客 <a href="http://www.ruanyifeng.com/blog/2018/06/javascript-this.html" target="_blank" rel="external">JavaScript的this原理</a>，用图的形式讲解了存放方式。</p>
+<ol>
+<li>构造器函数调用<br>如果你在一个函数前面加上<code>new</code>关键词来调用，此时会创建一个prototype属性，是这个函数的一个新对象，在调用这个的时候，会把this绑定在这个新对象上。new关键字也会改变return语句的行为。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">xx</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.x = xx</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> a(<span class="number">4</span>)</div><div class="line"></div><div class="line"><span class="comment">// b.x 输出 4</span></div><div class="line"><span class="comment">// window.x  输出 undefined</span></div></pre></td></tr></table></figure>
+<ol>
+<li>apply/call调用<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">xx</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.b = xx;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line">a.apply(o, [<span class="number">5</span>]);</div><div class="line">alert(a.b);    <span class="comment">// undefined</span></div><div class="line">alert(o.b);    <span class="comment">// 5</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>看到了这么一段非常有趣的形容：</p>
+<blockquote>
+<p>猫吃鱼，狗吃肉，奥特曼打小怪兽</p>
+</blockquote>
+<p>但是当有一天 狗想吃鱼的时候： <code>猫.吃鱼.call(狗, 鱼)</code>，这样狗就吃到鱼了。</p>
+<p>猫猫不仅想吃肉，还想吃猪肉牛肉鸡肉，那就可以 <code>狗.吃肉.apply(猫, [猪肉, 牛肉, 鸡肉])</code></p>
+<p>猫有一天想打小怪兽了，那就：<code>奥特曼.打小怪兽.call(猫, 小怪兽)</code>，这样猫猫就可以打爆小怪兽了～</p>
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>与call和apply方法不同的是，call和apply方法在被调用时就直接执行了当前的函数，而bind直接返回了一个改变了函数上下文之后的新函数。</p>
+<p>bind()方法创建一个新的函数，当被调用时，将其<code>this</code>关键词设置为提供的值，在调用新函数时，在任何提供之前提供一个给定的参数序列。</p>
+<p>这个新函数与原函数并非是同一个函数，而且与call类似，bind方法接受列表形式的参数</p>
+<p>以及：bind内部其实是使用apply/call进行的绑定，所以多次调用bind()是无效的。</p>
+<p>示例：</p>
+<ul>
+<li><p>解决在另一个函数中仍保持this上下文</p>
+</li>
+<li><p>创建绑定函数</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.x = <span class="number">9</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> <span class="built_in">module</span> = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">81</span>,</div><div class="line">  <span class="attr">getX</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.x</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> retrieveX = <span class="built_in">module</span>.getX</div><div class="line">retrieveX()    <span class="comment">// 返回9</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> boundGetX = retrieveX.bind(<span class="built_in">module</span>)</div><div class="line">boundGetX()  <span class="comment">// 返回81</span></div></pre></td></tr></table></figure>
+<ul>
+<li>点击处理函数<br>场景：记录点击的次数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> logger = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">0</span></div><div class="line">  updateCount: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.x ++</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们需要调用logger中的<code>updateCount()</code>方法，但是需要记录x的值。所以使用<code>logger.updateCount.bind(logger)</code></p>
+<ul>
+<li>和setTimeout一起使用<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> logger = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">0</span></div><div class="line">  updateCount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.x ++</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x)</div><div class="line">  &#125;</div><div class="line">  showCount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这是上面那个例子中的logger</span></div><div class="line"><span class="comment">// 但是当我们想要使用setTimeout的时候调用logger.showCount()的时候，需要额外小心。</span></div><div class="line"></div><div class="line"><span class="comment">// setTimeout(func | code, time)，第一个参数的运行环境是window。其实是window.setTimeout()</span></div><div class="line"><span class="comment">// 如果想实现：再延迟1s后，显示当前的logger中x的值。</span></div><div class="line"></div><div class="line"><span class="comment">// ❌ </span></div><div class="line">setTimeout(logger.showCount, <span class="number">1000</span>)</div><div class="line"><span class="comment">// 输出 undefined</span></div><div class="line"><span class="comment">// 如果直接使用这种方式，会输出 undefined，这是因为当前运行环境在window，具体请看这篇博客</span></div><div class="line"><span class="comment">// http://www.ruanyifeng.com/blog/2018/06/javascript-this.html</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// ✅ 实现方案1: 使用es6中的箭头函数</span></div><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;logger.showCount()&#125;, <span class="number">1000</span>)</div><div class="line"></div><div class="line"><span class="comment">// ✅ 实现方案2: 使用一个匿名函数来保证作用对象是logger</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  logger.showCount()</div><div class="line">&#125;, <span class="number">1000</span>)</div><div class="line"></div><div class="line"><span class="comment">// ✅ 实现方案3: 使用bind，将logger.showCount()绑定到正确的上下文执行环境。</span></div><div class="line">setTimeout(logger.showCount.bind(logger), <span class="number">1000</span>) <span class="comment">// 如果是在logger对象中，则bind(this)</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Function.prototype.bind()内部的样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">scope</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> fn = <span class="keyword">this</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> fn.apply(scope)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    PetnaKanojo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moe.petnakanojo.com/2018/07/09/浅析JavaScript-作用域和执行上下文/" title="浅析JavaScript - 作用域和执行上下文">http://moe.petnakanojo.com/2018/07/09/浅析JavaScript-作用域和执行上下文/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/context/" rel="tag"># context</a>
+          
+            <a href="/tags/bind/" rel="tag"># bind</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/09/浅析JavaScript-原型链与继承/" rel="next" title="浅析JavaScript -原型链与继承">
+                <i class="fa fa-chevron-left"></i> 浅析JavaScript -原型链与继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">PetnaKanojo</p>
+              <p class="site-description motion-element" itemprop="description">永远温柔可爱</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#博客"><span class="nav-number">1.</span> <span class="nav-text">博客</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域是什么"><span class="nav-number"></span> <span class="nav-text">作用域是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数体内作用域"><span class="nav-number">1.</span> <span class="nav-text">函数体内作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数嵌套，内部函数可访问外部函数定义变量"><span class="nav-number">2.</span> <span class="nav-text">函数嵌套，内部函数可访问外部函数定义变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量屏蔽"><span class="nav-number">3.</span> <span class="nav-text">变量屏蔽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量生存周期"><span class="nav-number">4.</span> <span class="nav-text">变量生存周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量重名"><span class="nav-number">5.</span> <span class="nav-text">变量重名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量提升"><span class="nav-number">6.</span> <span class="nav-text">变量提升</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局作用域"><span class="nav-number"></span> <span class="nav-text">全局作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命名冲突"><span class="nav-number">0.1.</span> <span class="nav-text">命名冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部作用域"><span class="nav-number"></span> <span class="nav-text">局部作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.</span> <span class="nav-text">块级作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#妙用apply-bind-call"><span class="nav-number"></span> <span class="nav-text">妙用apply, bind, call</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-amp-call"><span class="nav-number">1.</span> <span class="nav-text">apply & call</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bind"><span class="nav-number">2.</span> <span class="nav-text">bind</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PetnaKanojo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">44.3k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+<span>|&nbsp;  <a href="http://www.miitbeian.gov.cn/">  沪ICP备17003868号-1  </a></span>
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 您是这里的第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      个小伙伴～
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      views.
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
