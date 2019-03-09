@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicion.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Welcome!" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言今天我就要跟你这个原型链决一死战！ 创建对象首先我们来介绍一下对象： 介绍对象1). 属性类型(a) 数据属性 [[Configurable]]  能否通过delete删除属性从而重新定义属性，默认true [[Enumeralbe]]    能否通过for-in循环返回属性，默认true [[Writable]]   能否修改属性的值。默认值为true [[Value]]   包含这个属性的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Welcome!">
+<meta property="og:url" content="http://moe.petnakanojo.com/2019/03/08/原型链/index.html">
+<meta property="og:site_name" content="Welcome!">
+<meta property="og:description" content="前言今天我就要跟你这个原型链决一死战！ 创建对象首先我们来介绍一下对象： 介绍对象1). 属性类型(a) 数据属性 [[Configurable]]  能否通过delete删除属性从而重新定义属性，默认true [[Enumeralbe]]    能否通过for-in循环返回属性，默认true [[Writable]]   能否修改属性的值。默认值为true [[Value]]   包含这个属性的">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190308192224710.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190309114941257.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190309153238172.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190309153341961.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190309154814965.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190309155740703.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/%E5%89%8D%E7%AB%AF/assets/image-20190306203726301.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/%E5%89%8D%E7%AB%AF/assets/image-20190306204829034.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2019/03/08/%E5%89%8D%E7%AB%AF/assets/image-20190306204814908.png">
+<meta property="og:updated_time" content="2019-03-09T13:00:48.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Welcome!">
+<meta name="twitter:description" content="前言今天我就要跟你这个原型链决一死战！ 创建对象首先我们来介绍一下对象： 介绍对象1). 属性类型(a) 数据属性 [[Configurable]]  能否通过delete删除属性从而重新定义属性，默认true [[Enumeralbe]]    能否通过for-in循环返回属性，默认true [[Writable]]   能否修改属性的值。默认值为true [[Value]]   包含这个属性的">
+<meta name="twitter:image" content="http://moe.petnakanojo.com/2019/03/08/原型链/原型链.assets/image-20190308192224710.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"slideUpIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://moe.petnakanojo.com/2019/03/08/原型链/"/>
+
+
+
+
+
+  <title> | Welcome!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Welcome!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">PetnaKanojo's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-apostil">
+          <a href="/apostil" rel="section">
+            
+            札记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friendlinks">
+          <a href="/friendlinks" rel="section">
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+            小工具
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://moe.petnakanojo.com/2019/03/08/原型链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PetnaKanojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T19:05:33+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,334字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天我就要跟你这个原型链决一死战！</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>首先我们来介绍一下对象：</p>
+<h3 id="介绍对象"><a href="#介绍对象" class="headerlink" title="介绍对象"></a>介绍对象</h3><h4 id="1-属性类型"><a href="#1-属性类型" class="headerlink" title="1). 属性类型"></a>1). 属性类型</h4><h6 id="a-数据属性"><a href="#a-数据属性" class="headerlink" title="(a) 数据属性"></a>(a) 数据属性</h6><ul>
+<li>[[Configurable]]  能否通过delete删除属性从而重新定义属性，默认true</li>
+<li>[[Enumeralbe]]    能否通过for-in循环返回属性，默认true</li>
+<li>[[Writable]]   能否修改属性的值。默认值为true</li>
+<li>[[Value]]   包含这个属性的数据值。默认值为Undefined</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;&#125;</div><div class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</div><div class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">configurable</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">value</span>: <span class="string">"PetnaKanojo"</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h6 id="b-访问器属性"><a href="#b-访问器属性" class="headerlink" title="(b) 访问器属性"></a>(b) 访问器属性</h6><p>使用访问器属性的常见方式是设置一个属性的值会导致其他属性发生变化</p>
+<ul>
+<li>[[Configurable]] 能否通过delete删除属性从而重新定义属性</li>
+<li>[[Enumerable]]  能否通过for-in循环返回属性</li>
+<li>[[Get]] 在读取属性时调用的函数</li>
+<li>[[Set]] 在写入属性时调用的函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> book = &#123;</div><div class="line">    <span class="attr">_year</span>: <span class="number">2004</span>,</div><div class="line">    <span class="attr">edition</span>: <span class="number">1</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123;  <span class="comment">// 这里是访问器属性</span></div><div class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._year</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</div><div class="line">            <span class="keyword">this</span>._year = newValue</div><div class="line">            <span class="keyword">this</span>._edition += newValue - <span class="number">2004</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">book.year = <span class="number">2005</span></div><div class="line">alert(book.edition)  <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️：可通过Object.defineProperties()来定义多个属性，可以是数据属性也可以是访问器属性。</p>
+</blockquote>
+<h4 id="2）读取特性"><a href="#2）读取特性" class="headerlink" title="2）读取特性"></a>2）读取特性</h4><p>使用<code>Object.getOwnPropertyDescription()</code>方法来取得给定属性的描述符。根据属性类型的不同，返回的对象属性也不同。</p>
+<table>
+<thead>
+<tr>
+<th>属性类型</th>
+<th>返回的对象属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问器属性</td>
+<td>configurable, enumerable, get, set</td>
+</tr>
+<tr>
+<td>数据属性</td>
+<td>configurable, enumerable, writable, value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一、对象分类"><a href="#一、对象分类" class="headerlink" title="一、对象分类"></a>一、对象分类</h3><p>JS中，可以将对象分为“内部对象”、“宿主对象”和“自定义对象”三种。</p>
+<ul>
+<li><p>内部对象</p>
+<p>​        js中的内部对象包括Array、Boolean、Date、Function、Global、Math、Number、Object、RegExp、String以及各种错误类对象，包括Error、EvalError、RangeError、ReferenceError、SyntaxError和TypeError。</p>
+<p>​       其中Global和Math这两个对象又被称为“内置对象”，这两个对象在脚本程序初始化时被创建，不必实例化这两个对象。</p>
+</li>
+<li><p>宿主对象</p>
+<p>​        宿主对象就是执行JS脚本的环境提供的对象。对于嵌入到网页中的JS来说，其宿主对象就是浏览器提供的对象，所以又称为浏览器对象，如IE、Firefox等浏览器提供的对象。不同的浏览器提供的宿主对象可能不同，即使提供的对象相同，其实现方式也大相径庭！这会带来浏览器兼容问题，增加开发难度。</p>
+<p>​        浏览器对象有很多，如Window和Document，Element，form，image，等等。</p>
+</li>
+<li><p>自定义对象</p>
+<p>​        顾名思义，就是开发人员自己定义的对象。JS允许使用自定义对象，使JS应用及功能得到扩充</p>
+</li>
+</ul>
+<h3 id="二、工厂模式"><a href="#二、工厂模式" class="headerlink" title="二、工厂模式"></a>二、工厂模式</h3><p>这种就是内部创建一个对象，然后给对象添加属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name,age</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>()</div><div class="line">    o.name = name</div><div class="line">    o.age = age</div><div class="line">    o.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> o</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="三、构造函数模式"><a href="#三、构造函数模式" class="headerlink" title="三、构造函数模式"></a>三、构造函数模式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">    <span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> personA = <span class="keyword">new</span> Person(<span class="string">"wwh"</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>按照国际惯例，构造函数始终以一个大写字母开头，而非构造函数则应该以一个小写字母开头。</p>
+<p>要创建一个Person的新实例，必须使用new操作符。</p>
+<ol>
+<li>创建一个新对象</li>
+<li>将构造函数的作用域赋给新对象（this指向了这个对象）</li>
+<li>执行构造函数中的代码（为这个新对象添加属性）</li>
+<li>返回新对象</li>
+</ol>
+<p>所以这个new的实现应该是这样的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> _new(<span class="params">constructor, ...params</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> object = &#123;&#125;</div><div class="line">    object.__proto__ = <span class="keyword">constructor</span>.prototype</div><div class="line">    const reObject = <span class="keyword">constructor</span>.apply(object, params)</div><div class="line">    return (typeof reObject === 'object' &amp;&amp; reObject !== null) ? reObject : object</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里又涉及了一些构造函数的骚操作。</p>
+<h4 id="1-构造函数当作函数"><a href="#1-构造函数当作函数" class="headerlink" title="1. 构造函数当作函数"></a>1. 构造函数当作函数</h4><p>任何函数只要通过new操作符来调用，都可以作为构造函数。而任何函数不通过new操作符来调用，也都只是一个普通函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当作构造函数使用</span></div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"test"</span>, <span class="number">33</span>)</div><div class="line">person.sayName()   <span class="comment">// "test"</span></div><div class="line"></div><div class="line"><span class="comment">// 作为普通函数调用</span></div><div class="line">Person(<span class="string">"Alice"</span>, <span class="number">3</span>)</div><div class="line"><span class="built_in">window</span>.sayName()   <span class="comment">// "Alice"</span></div><div class="line"></div><div class="line"><span class="comment">// 在另一个对象的作用域中调用</span></div><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>()</div><div class="line">Person.call(o, <span class="string">"gg"</span>, <span class="number">10</span>)</div><div class="line">o.sayName()     <span class="comment">// "gg"</span></div></pre></td></tr></table></figure>
+<h4 id="2-构造函数的问题"><a href="#2-构造函数的问题" class="headerlink" title="2. 构造函数的问题"></a>2. 构造函数的问题</h4><p>但是通过这样的方式构建的Person其实存在浪费。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">person1.sayName == person2.sayName  <span class="comment">//false</span></div></pre></td></tr></table></figure>
+<p>我们应该通过把函数定义转移到构造函数外部来解决创建两个完成了同样任务的Function实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">    <span class="keyword">this</span>.sayName = sayName</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="四、-原型模式"><a href="#四、-原型模式" class="headerlink" title="四、 原型模式"></a>四、 原型模式</h3><p> 创建的每个函数都有一个prototype属性，指向一个对象。而这个对象的用途是包括可以由特定类型的所有实例共享的属性和方法。</p>
+<p>每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。搜索首先从对象实例本身开始，如果找到了，返回。如果没有找到，会继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。实例属性会覆盖原型属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">A.prototype.name = <span class="string">"A"</span></div><div class="line">A.prototype.age = <span class="number">3</span></div><div class="line">A.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A()</div><div class="line">a.sayName()    <span class="comment">// "A"</span></div></pre></td></tr></table></figure>
+<p>可通过delete删除实例属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">"insideA"</span></div><div class="line">&#125;</div><div class="line">A.prototype.name = <span class="string">"A"</span></div><div class="line">A.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A()</div><div class="line">a.sayName()      <span class="comment">// "insideA"</span></div><div class="line"></div><div class="line"><span class="keyword">delete</span> a.name</div><div class="line">a.sayName()      <span class="comment">// "A"</span></div></pre></td></tr></table></figure>
+<h3 id="五、组合使用构造函数模式和原型模式👏"><a href="#五、组合使用构造函数模式和原型模式👏" class="headerlink" title="五、组合使用构造函数模式和原型模式👏"></a>五、组合使用构造函数模式和原型模式👏</h3><p>使用非常广泛，可以说这是用来定义引用类型的一种默认模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">&#125;</div><div class="line">Person.prototype = &#123;</div><div class="line">    <span class="attr">constructor</span>: Person,</div><div class="line">    <span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Bob"</span>, <span class="number">10</span>)</div><div class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Alice"</span>, <span class="number">12</span>)</div><div class="line">person1.sayName == person2.sayName  <span class="comment">// true</span></div><div class="line">person1.name == person2.name		<span class="comment">// false</span></div></pre></td></tr></table></figure>
+<h3 id="六、动态原型模式"><a href="#六、动态原型模式" class="headerlink" title="六、动态原型模式"></a>六、动态原型模式</h3><p>为了把所有信息都封装在构造函数，而通过在构造函数中初始化原型，又同时保持了使用构造函数和原型的优点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span>.sayName != <span class="string">"function"</span>) &#123;</div><div class="line">        Person.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Bob"</span>, <span class="number">10</span>)</div><div class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Alice"</span>, <span class="number">12</span>)</div><div class="line">person1.sayName == person2.sayName   <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="七、寄生构造函数模式"><a href="#七、寄生构造函数模式" class="headerlink" title="七、寄生构造函数模式"></a>七、寄生构造函数模式</h3><p>这个模式是为了为对象创建构造函数。比如像创建一个具有额外方法的特殊数组，但是不能直接修改Array的构造函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SpecialArray</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> values = <span class="keyword">new</span> <span class="built_in">Array</span>()</div><div class="line">    values.push.apply(values, <span class="built_in">arguments</span>)</div><div class="line">    values.toPipedString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.join(<span class="string">"|"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> values</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="八、稳妥构造函数模式"><a href="#八、稳妥构造函数模式" class="headerlink" title="八、稳妥构造函数模式"></a>八、稳妥构造函数模式</h3><h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>首先我要上张图</p>
+<p><img src="原型链.assets/image-20190308192224710.png" alt="image-20190308192224710"></p>
+<h3 id="一、借用构造函数"><a href="#一、借用构造函数" class="headerlink" title="一、借用构造函数"></a>一、借用构造函数</h3><h4 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h4><p>就是在子类型构造函数的内部调用超类型构造函数。<strong>函数只不过是在特定环境中执行代码的对象</strong>，因此可以通过apply和call在将来新创建的对象上执行构造函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.colors = [<span class="string">"red"</span>]</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    SuperType.call(<span class="keyword">this</span>)   </div><div class="line">    <span class="comment">// 在未来将要创建的SubType实例的环境下调用了SuperType的构造函数。</span></div><div class="line">    <span class="comment">// 这样就会在新的SubType对象上执行SuperType()函数中定义的所有对象初始化代码</span></div><div class="line">    </div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType()</div><div class="line">instance1.colors.push(<span class="string">"black"</span>)</div><div class="line">alert(instance1.colors)  <span class="comment">// ["red", "black"]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType()</div><div class="line">alert(instance2.colors)  <span class="comment">// ["red"]</span></div></pre></td></tr></table></figure>
+<h4 id="2-问题"><a href="#2-问题" class="headerlink" title="2. 问题"></a>2. 问题</h4><p>方法在构造函数中定义，这样函数就不能复用了。而且SuperType在原型中定义的方法不能在子类型中不可见。这样的话那么SuperType的函数也必须定义在内部。这样太不合适啦！</p>
+<h3 id="二、组合继承（用得最多！）"><a href="#二、组合继承（用得最多！）" class="headerlink" title="二、组合继承（用得最多！）"></a>二、组合继承（用得最多！）</h3><h4 id="1-原理-1"><a href="#1-原理-1" class="headerlink" title="1. 原理"></a>1. 原理</h4><p>将原型链和借用构造函数的技术组合。使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。这样，既通过在原型上定义方法实现了函数复用，又能保证每个实例都有自己的属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.colors = [<span class="string">"red"</span>]</div><div class="line">&#125;</div><div class="line"></div><div class="line">Super.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">	<span class="comment">// 继承属性</span></div><div class="line">    Super.call(<span class="keyword">this</span>, name)</div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">&#125;</div><div class="line"><span class="comment">// 继承方法</span></div><div class="line">Sub.prototype = <span class="keyword">new</span> Super()</div><div class="line">Sub.prototype.constructor = Sub</div><div class="line">Sub.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="1-继承属性"><a href="#1-继承属性" class="headerlink" title="1) 继承属性"></a>1) 继承属性</h5><ol>
+<li>创建一个新对象</li>
+<li>将构造函数的作用域赋给新对象（this指向了这个对象）</li>
+<li>执行构造函数中的代码（为这个新对象添加属性）</li>
+<li>返回新对象</li>
+</ol>
+<h5 id="2-继承方法"><a href="#2-继承方法" class="headerlink" title="2) 继承方法"></a>2) 继承方法</h5><p>为了理解继承方法的原理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Super(<span class="string">"test"</span>)</div></pre></td></tr></table></figure>
+<p><img src="原型链.assets/image-20190309114941257.png" alt="image-20190309114941257"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test.__proto__ = Super.prototype</div></pre></td></tr></table></figure>
+<p>因此执行结果为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Sub.prototype = <span class="keyword">new</span> Super() = test</div><div class="line"><span class="comment">// test.__protot__ = Super.prototype</span></div><div class="line"><span class="comment">// test 上还有继承属性</span></div><div class="line"><span class="comment">// Sub.prototype.__proto__ = Super.prototype</span></div><div class="line"><span class="comment">// Sub.prototype.constructor.prototype = Super.prototype</span></div><div class="line"></div><div class="line">Sub.prototype.constructor = Sub</div><div class="line"><span class="comment">// 此时 Sub.prototype.__proto__还是 Super.prototype</span></div><div class="line"><span class="comment">// 但是Sub.prototype就空出来了，而且Sub.prototype.constructor还是等于Sub，通过Sub.prototype.construtor.prototype继承Super的prototype</span></div></pre></td></tr></table></figure>
+<h5 id="3-辨别"><a href="#3-辨别" class="headerlink" title="3) 辨别"></a>3) 辨别</h5><p>使用<code>instanceof</code>和<code>isPropertyOf()</code>来进行识别。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> Sub()</div><div class="line">c <span class="keyword">instanceof</span> Super <span class="comment">// true</span></div><div class="line">c <span class="keyword">instanceof</span> Sub   <span class="comment">// true</span></div><div class="line">Super.prototype.isPropertyOf(c) <span class="comment">// true</span></div><div class="line">Sub.prototype.isPropertyOf(c)   <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h4 id="2-问题-1"><a href="#2-问题-1" class="headerlink" title="2. 问题"></a>2. 问题</h4><p>调用了两次Super构造函数。</p>
+<p>一次是在内部，使用call方式继承属性，第二次是在外部，继承prototype上的方法的时候。</p>
+<h3 id="三、原型式继承"><a href="#三、原型式继承" class="headerlink" title="三、原型式继承"></a>三、原型式继承</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>借助原型可以基于已有的对象创建新对象，而且不必因此创建自定义类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">    F.prototype = o</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这是一个浅拷贝。当<code>o</code> 中有引用项时，会对原属性进行修改。</p>
+<p><img src="原型链.assets/image-20190309153238172.png" alt="image-20190309153238172"></p>
+<h3 id="四、寄生式继承"><a href="#四、寄生式继承" class="headerlink" title="四、寄生式继承"></a>四、寄生式继承</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>与寄生构造函数和工厂模式类似，即创建一个仅用于封装过程的函数，在内部以某种方式增强对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> clone = object(original)</div><div class="line">    clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"hi"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> clone</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="原型链.assets/image-20190309153341961.png" alt="image-20190309153341961"></p>
+<h3 id="五、寄生组合式继承"><a href="#五、寄生组合式继承" class="headerlink" title="五、寄生组合式继承"></a>五、寄生组合式继承</h3><h4 id="1-对组合继承的缺点思考"><a href="#1-对组合继承的缺点思考" class="headerlink" title="1. 对组合继承的缺点思考"></a>1. 对组合继承的缺点思考</h4><p>组合继承最大的问题就是会调用两次Super类型构造函数。</p>
+<p><img src="原型链.assets/image-20190309154814965.png" alt="image-20190309154814965"></p>
+<p>这个的意思就是每次使用组合继承创建对象的时候，其实都在原型和实例中创建了两组Super的实例属性，但是实例属性的优先级高于原型中的属性。</p>
+<p>来理解一下两次调用发生了什么。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.colors = [<span class="string">"red"</span>]</div><div class="line">&#125;</div><div class="line"></div><div class="line">Super.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">	<span class="comment">// 继承属性</span></div><div class="line">    Super.call(<span class="keyword">this</span>, name)    <span class="comment">// 第二次调用</span></div><div class="line">    <span class="keyword">this</span>.age = age</div><div class="line">&#125;</div><div class="line"><span class="comment">// 继承方法</span></div><div class="line">Sub.prototype = <span class="keyword">new</span> Super()   <span class="comment">// 第一次调用</span></div><div class="line">Sub.prototype.constructor = Sub</div><div class="line">Sub.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>第一次调用的时候，利用<code>new Super()</code> 创建的时候，实际上 <code>Sub.prototype</code> 上发生了这样的事情（好糟糕！）</p>
+</li>
+<li><p>将构造函数的作用域赋给新对象，在新对象上面执行构造函数的代码（创建属性）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Sub.prototype = <span class="keyword">new</span> Super()</div><div class="line"></div><div class="line"><span class="comment">// Sub.prototype.name = name</span></div><div class="line"><span class="comment">// Sub.prototype.colors = ["red"]</span></div><div class="line"><span class="comment">// Sub.prototype.__proto__ = Super.prototype   // 获取原型链上的函数</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>而当第二次调用的时候，利用<code>new Sub()</code> 创建一个对象的时候，在<code>Sub()</code>构造函数内也调用了一次<code>Super.call(this, name)</code></p>
+</li>
+<li><p>这个时候实际上在Sub内部又跑了一次<code>Super()</code>构造函数内的代码，而这样就使得<code>Sub</code>实例内又得到了一次<code>name</code> 和<code>colors</code>属性！！！！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> Sub(<span class="string">"c"</span>)</div><div class="line"><span class="comment">// 由于Super.call(this, "c")</span></div><div class="line"><span class="comment">// c.name = "c"</span></div><div class="line"><span class="comment">// c.colors = ["red"]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>⚠️⚠️ 这样的话就导致了Super的实例属性在Sub上复制了两次！！！！</p>
+<p><img src="原型链.assets/image-20190309155740703.png" alt="image-20190309155740703"></p>
+<p>因此我们需要寻找一个新的解决方案！那就是寄生组合式继承！🎉🎉</p>
+<h4 id="2-原理"><a href="#2-原理" class="headerlink" title="2. 原理"></a>2. 原理</h4><p>借用构造函数来继承属性，通过原型链的混成形式来继承方法。我们不需为了指定子类型的原型来调用超类型的构造函数，我们需要的仅仅是超类型的原型的一个副本。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">sub, super</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> prototype = object(<span class="keyword">super</span>.prototype)  <span class="comment">// 创建超类型原型的副本</span></div><div class="line">    prototype.constructor = sub				 <span class="comment">// 增强对象</span></div><div class="line">    sub.prototype = prototype				 <span class="comment">// 指定对象</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="原型链间的验证"><a href="#原型链间的验证" class="headerlink" title="原型链间的验证"></a>原型链间的验证</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name, color, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.age = (age === <span class="literal">undefined</span>) ? <span class="number">0</span> : age</div><div class="line">    <span class="keyword">this</span>.color = color</div><div class="line">&#125;</div><div class="line">Cat.prototype.meow = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`I am <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>, my age is <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span> and my color is <span class="subst">$&#123;<span class="keyword">this</span>.color&#125;</span>`</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> catA = <span class="keyword">new</span> Cat(<span class="string">"catA"</span>, <span class="string">"black"</span>, <span class="number">2</span>)</div></pre></td></tr></table></figure>
+<h3 id="1-实例对象-constructor"><a href="#1-实例对象-constructor" class="headerlink" title="1. 实例对象.constructor"></a>1. 实例对象.constructor</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(catA.constructor === Cat)   <span class="comment">// true</span></div><div class="line">alert(catA.__prototype__ === Cat.prototype) <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="2-实例对象-instanceof-原型对象"><a href="#2-实例对象-instanceof-原型对象" class="headerlink" title="2. 实例对象 instanceof 原型对象"></a>2. 实例对象 instanceof 原型对象</h3><p>验证原型对象与实例对象之间的关系</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(catA <span class="keyword">instanceof</span> Cat)   <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="3-prototype对象-isPrototypeOf-实例"><a href="#3-prototype对象-isPrototypeOf-实例" class="headerlink" title="3. prototype对象.isPrototypeOf (实例)"></a>3. prototype对象.isPrototypeOf (实例)</h3><p>用来验证某个prototype对象和某个实例之间的关系</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Cat.prototype.isPrototypeOf(catA)</div><div class="line"><span class="comment">// true</span></div><div class="line">Cat.prototype.isPrototypeOf(catA)</div><div class="line"><span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(Cat)</div><div class="line"><span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(catA)</div><div class="line"><span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p><img src="../%E5%89%8D%E7%AB%AF/assets/image-20190306203726301.png" alt="image-20190306203726301"></p>
+<p>我们还能使用<code>Object.getPropertyOf()</code>来返回 <code>__proto__</code> 的值（对象）</p>
+<h3 id="4-hasOwnProperty-“属性名”"><a href="#4-hasOwnProperty-“属性名”" class="headerlink" title="4. hasOwnProperty(“属性名”)"></a>4. hasOwnProperty(“属性名”)</h3><p>用来判断某一个属性到底是本地属性还是继承自prototype的属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">catA.hasOwnProperty(<span class="string">"meow"</span>)   <span class="comment">// false</span></div><div class="line">catA.hasOwnProperty(<span class="string">"name"</span>)   <span class="comment">// true</span></div><div class="line">catA.__proto__.hasOwnProperty(<span class="string">"meow"</span>)  <span class="comment">// true</span></div><div class="line">Cat.hasOwnProperty(<span class="string">"name"</span>)    <span class="comment">// true</span></div><div class="line">Cat.hasOwnProperty(<span class="string">"meow"</span>)    <span class="comment">// false</span></div><div class="line">Cat.prototype.hasOwnProperty(<span class="string">"meow"</span>)   <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>实现代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasOwnProperty</span>(<span class="params">obj, prop</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> proto = obj.__proto__ || obj.constructor.prototype</div><div class="line">    <span class="keyword">const</span> propInObj = (prop <span class="keyword">in</span> obj)</div><div class="line">    <span class="keyword">const</span> propInObjPrototype = </div><div class="line">          (!(prop <span class="keyword">in</span> proto) || (proto[prop] !== obj[prop]))</div><div class="line">    <span class="comment">// 前一个表示prop不能再proto中</span></div><div class="line">    <span class="comment">// 后一个表示可以在proto中但obj跟proto的prop不是同一个</span></div><div class="line">    <span class="keyword">return</span> propInObj &amp;&amp; propInObjPrototype</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-“属性名”-in-实例"><a href="#5-“属性名”-in-实例" class="headerlink" title="5.  “属性名” in 实例"></a>5.  “属性名” in 实例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">'name'</span> <span class="keyword">in</span> catA    <span class="comment">// true</span></div><div class="line"><span class="string">'meow'</span> <span class="keyword">in</span> catA    <span class="comment">// true</span></div><div class="line"><span class="string">'name'</span> <span class="keyword">in</span> Cat     <span class="comment">// true</span></div><div class="line"><span class="string">'meow'</span> <span class="keyword">in</span> Cat     <span class="comment">// false    不在Cat中，在Cat.prototype中哦</span></div><div class="line"><span class="string">'meow'</span> <span class="keyword">in</span> Cat.prototype     <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>此时通过遍历一遍可以得到原因：</p>
+<p><img src="../%E5%89%8D%E7%AB%AF/assets/image-20190306204829034.png" alt="image-20190306204829034"></p>
+<p><img src="../%E5%89%8D%E7%AB%AF/assets/image-20190306204814908.png" alt="image-20190306204814908"></p>
+<h2 id="习题练习"><a href="#习题练习" class="headerlink" title="习题练习"></a>习题练习</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实现一个Human，输入输出如下</span></div><div class="line">Human(<span class="string">'Peter'</span>)</div><div class="line"><span class="comment">// I am Peter</span></div><div class="line">Human(<span class="string">'Peter'</span>).eat(<span class="string">'apple'</span>)</div><div class="line"><span class="comment">// I am Peter</span></div><div class="line"><span class="comment">// Start to eat apple</span></div><div class="line">Human(<span class="string">'Peter'</span>).rest(<span class="number">10</span>).eat(<span class="string">'apple'</span>)</div><div class="line"><span class="comment">// I am Peter</span></div><div class="line"><span class="comment">// Starting rest 10s</span></div><div class="line"><span class="comment">// （等待十秒）</span></div><div class="line"><span class="comment">// Start to eat apple</span></div><div class="line">Human(<span class="string">'peter'</span>).go(<span class="string">'home'</span>).rest(<span class="number">10</span>).eat(<span class="string">'apple'</span>)</div><div class="line"><span class="comment">// I am Peter</span></div><div class="line"><span class="comment">// Start to go home</span></div><div class="line"><span class="comment">// Starting rest 10s</span></div><div class="line"><span class="comment">// （等待十秒）</span></div><div class="line"><span class="comment">// Start to eat apple</span></div><div class="line">Human(<span class="string">'Peter'</span>).eat(<span class="string">'apple'</span>).rest(<span class="number">10</span>).go(<span class="string">'home'</span>)</div><div class="line"><span class="comment">// I am Peter</span></div><div class="line"><span class="comment">// Start to eat apple</span></div><div class="line"><span class="comment">// Starting rest 10s</span></div><div class="line"><span class="comment">// （等待十秒）</span></div><div class="line"><span class="comment">// Start to go home</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    PetnaKanojo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moe.petnakanojo.com/2019/03/08/原型链/" title="">http://moe.petnakanojo.com/2019/03/08/原型链/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/24/计算机网络复习/" rel="next" title="计算机网络-自顶向下 前五章重点整理内容">
+                <i class="fa fa-chevron-left"></i> 计算机网络-自顶向下 前五章重点整理内容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">PetnaKanojo</p>
+              <p class="site-description motion-element" itemprop="description">永远温柔可爱</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建对象"><span class="nav-number">2.</span> <span class="nav-text">创建对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍对象"><span class="nav-number">2.1.</span> <span class="nav-text">介绍对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-属性类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">1). 属性类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-数据属性"><span class="nav-number">2.1.1.0.1.</span> <span class="nav-text">(a) 数据属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#b-访问器属性"><span class="nav-number">2.1.1.0.2.</span> <span class="nav-text">(b) 访问器属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）读取特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">2）读取特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、对象分类"><span class="nav-number">2.2.</span> <span class="nav-text">一、对象分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、工厂模式"><span class="nav-number">2.3.</span> <span class="nav-text">二、工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、构造函数模式"><span class="nav-number">2.4.</span> <span class="nav-text">三、构造函数模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-构造函数当作函数"><span class="nav-number">2.4.1.</span> <span class="nav-text">1. 构造函数当作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-构造函数的问题"><span class="nav-number">2.4.2.</span> <span class="nav-text">2. 构造函数的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-原型模式"><span class="nav-number">2.5.</span> <span class="nav-text">四、 原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、组合使用构造函数模式和原型模式👏"><span class="nav-number">2.6.</span> <span class="nav-text">五、组合使用构造函数模式和原型模式👏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、动态原型模式"><span class="nav-number">2.7.</span> <span class="nav-text">六、动态原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、寄生构造函数模式"><span class="nav-number">2.8.</span> <span class="nav-text">七、寄生构造函数模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、稳妥构造函数模式"><span class="nav-number">2.9.</span> <span class="nav-text">八、稳妥构造函数模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链"><span class="nav-number">3.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、借用构造函数"><span class="nav-number">3.1.</span> <span class="nav-text">一、借用构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原理"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-问题"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、组合继承（用得最多！）"><span class="nav-number">3.2.</span> <span class="nav-text">二、组合继承（用得最多！）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原理-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">1. 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-继承属性"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">1) 继承属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-继承方法"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2) 继承方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-辨别"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">3) 辨别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-问题-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">2. 问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、原型式继承"><span class="nav-number">3.3.</span> <span class="nav-text">三、原型式继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">3.3.1.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、寄生式继承"><span class="nav-number">3.4.</span> <span class="nav-text">四、寄生式继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、寄生组合式继承"><span class="nav-number">3.5.</span> <span class="nav-text">五、寄生组合式继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-对组合继承的缺点思考"><span class="nav-number">3.5.1.</span> <span class="nav-text">1. 对组合继承的缺点思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-原理"><span class="nav-number">3.5.2.</span> <span class="nav-text">2. 原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链间的验证"><span class="nav-number">4.</span> <span class="nav-text">原型链间的验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-实例对象-constructor"><span class="nav-number">4.1.</span> <span class="nav-text">1. 实例对象.constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实例对象-instanceof-原型对象"><span class="nav-number">4.2.</span> <span class="nav-text">2. 实例对象 instanceof 原型对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-prototype对象-isPrototypeOf-实例"><span class="nav-number">4.3.</span> <span class="nav-text">3. prototype对象.isPrototypeOf (实例)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-hasOwnProperty-“属性名”"><span class="nav-number">4.4.</span> <span class="nav-text">4. hasOwnProperty(“属性名”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-“属性名”-in-实例"><span class="nav-number">4.5.</span> <span class="nav-text">5.  “属性名” in 实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#习题练习"><span class="nav-number">5.</span> <span class="nav-text">习题练习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PetnaKanojo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">54.3k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+<span>|&nbsp;  <a href="http://www.miitbeian.gov.cn/">  沪ICP备17003868号-1  </a></span>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 您是这里的第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      个小伙伴～
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      views.
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
