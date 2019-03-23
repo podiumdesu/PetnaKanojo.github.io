@@ -477,7 +477,7 @@
 <li>返回新对象</li>
 </ol>
 <p>所以这个new的实现应该是这样的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_new</span>(<span class="params">constructor, ...params</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> object = &#123;&#125;</div><div class="line">    object.__proto__ = <span class="keyword">constructor</span>.prototype</div><div class="line">    const reObject = <span class="keyword">constructor</span>.apply(object, params)</div><div class="line">    return (typeof reObject === 'object' &amp;&amp; reObject !== null) ? reObject : object</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> _new(<span class="params">constructor, ...params</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> object = &#123;&#125;</div><div class="line">    object.__proto__ = <span class="keyword">constructor</span>.prototype</div><div class="line">    const reObject = <span class="keyword">constructor</span>.apply(object, params)</div><div class="line">    return (typeof reObject === 'object' &amp;&amp; reObject !== null) ? reObject : object</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这里又涉及了一些构造函数的骚操作。</p>
 <h4 id="1-构造函数当作函数"><a href="#1-构造函数当作函数" class="headerlink" title="1. 构造函数当作函数"></a>1. 构造函数当作函数</h4><p>任何函数只要通过new操作符来调用，都可以作为构造函数。而任何函数不通过new操作符来调用，也都只是一个普通函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当作构造函数使用</span></div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"test"</span>, <span class="number">33</span>)</div><div class="line">person.sayName()   <span class="comment">// "test"</span></div><div class="line"></div><div class="line"><span class="comment">// 作为普通函数调用</span></div><div class="line">Person(<span class="string">"Alice"</span>, <span class="number">3</span>)</div><div class="line"><span class="built_in">window</span>.sayName()   <span class="comment">// "Alice"</span></div><div class="line"></div><div class="line"><span class="comment">// 在另一个对象的作用域中调用</span></div><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>()</div><div class="line">Person.call(o, <span class="string">"gg"</span>, <span class="number">10</span>)</div><div class="line">o.sayName()     <span class="comment">// "gg"</span></div></pre></td></tr></table></figure>
@@ -703,7 +703,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -799,7 +799,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">54.3k</span>
+    <span title="Site words total count">57.9k</span>
   
 </div>
 
