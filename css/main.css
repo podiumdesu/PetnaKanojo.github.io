@@ -1829,7 +1829,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #da6520;
+  background: #e2ff55;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2914,7 +2914,7 @@ hr {
 .personbar .perpic a img {
   opacity: 0.7777777;
   transition: all ease 0.5s;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   box-shadow: 0.1px 0.1px 10px #808080;
 }
 .personbar .perpic a img:hover {

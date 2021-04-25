@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicion.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Welcome!" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Abstract: Recently, crowdsourcing has emerged as a new computing paradigm to solve problems that need human intrinsic, such as image annotation. However, there are two limitations in existing crowdsou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Note]Fluid: A blockchain based framework for crowdsourcing">
+<meta property="og:url" content="http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/index.html">
+<meta property="og:site_name" content="Welcome!">
+<meta property="og:description" content="Abstract: Recently, crowdsourcing has emerged as a new computing paradigm to solve problems that need human intrinsic, such as image annotation. However, there are two limitations in existing crowdsou">
+<meta property="og:image" content="http://moe.petnakanojo.com/images/fluid-blockchain-based-crowdsourcing.images/image-20210309150754035.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/images/fluid-blockchain-based-crowdsourcing.images/image-20210309150938970.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/images/fluid-blockchain-based-crowdsourcing.images/image-20210309171414971.png">
+<meta property="og:image" content="http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/images/fluid-blockchain-based-crowdsourcing.images/image-20210309171432900.png">
+<meta property="og:updated_time" content="2021-04-24T08:13:57.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Note]Fluid: A blockchain based framework for crowdsourcing">
+<meta name="twitter:description" content="Abstract: Recently, crowdsourcing has emerged as a new computing paradigm to solve problems that need human intrinsic, such as image annotation. However, there are two limitations in existing crowdsou">
+<meta name="twitter:image" content="http://moe.petnakanojo.com/images/fluid-blockchain-based-crowdsourcing.images/image-20210309150754035.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"slideUpIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/"/>
+
+
+
+
+
+  <title>[Note]Fluid: A blockchain based framework for crowdsourcing | Welcome!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Welcome!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">PetnaKanojo's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-apostil">
+          <a href="/apostil" rel="section">
+            
+            札记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friendlinks">
+          <a href="/friendlinks" rel="section">
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PetnaKanojo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Note]Fluid: A blockchain based framework for crowdsourcing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-24T16:05:15+08:00">
+                2021-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  722字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract:"></a>Abstract:</h2><blockquote>
+<p>Recently, crowdsourcing has emerged as a new computing paradigm to solve problems that need human intrinsic, such as image annotation. However, there are two limitations in existing crowdsourcing platforms, i.e. non-transparent incentive mechanism and isolated profiles of workers, which harms the interests of both requesters and workers. Meanwhile, Blockchain technology introduces a solution to build a transparent, immutable data model in the Byzantine environment. Moreover, Blockchain systems (e.g. Ethereum) can also support the Tuning-complete script called smart contracts. Thus, we are motivated to use the feature of the transparent data model and smart contract in Blockchain to address the two limitations. Based on the proposed solutions, we have designed a Blockchain based framework which supports foundations of general crowdsourcing platforms. In addition, our framework also has following novel features: (1) it provides the transparent incentive mechanisms; (2) it supports a trusted worker’s profile sharing in a cross-platform mode.</p>
+</blockquote>
+<h2 id="Paper-here"><a href="#Paper-here" class="headerlink" title="Paper here"></a><a href="https://dl.acm.org/doi/abs/10.1145/3299869.3320238" target="_blank" rel="external">Paper here</a></h2><a id="more"></a>
+<h1 id="Fluid-A-Blockchain-based-Framework-for-Crowdsourcing"><a href="#Fluid-A-Blockchain-based-Framework-for-Crowdsourcing" class="headerlink" title="Fluid:A Blockchain based Framework for Crowdsourcing"></a>Fluid:A Blockchain based Framework for Crowdsourcing</h1><h2 id="Promotion"><a href="#Promotion" class="headerlink" title="Promotion"></a>Promotion</h2><p>Crowdsourcing disadvantage:</p>
+<ul>
+<li>non-transparent incentive mechanism</li>
+<li>isolated profiles of workers</li>
+</ul>
+<p>So this paper is devoted to solve:</p>
+<ol>
+<li>provide transparent incentive mechanism</li>
+<li>trusted workers’ profiles sharing in a cross-platform mode</li>
+</ol>
+<p>I think the main point of sharing profiles is untenable.</p>
+<p><img src="/images/fluid-blockchain-based-crowdsourcing.images/image-20210309150754035.png" alt="image-20210309150754035"></p>
+<blockquote>
+<p>In this demo, we implement a Blockchain based framework called Fluid which provides transparent incentive mechanism for crowdsourcing platform. We also design the complete workflow which integrate typical crowdsourcing process with Blockchain. In addition, we design three smart contract templates to combine existing crowdsourcing algorithms. Moreover, we develop several APIs to manage task and Blockchain data based on Ethereum. Finally, we develop an Android client for users to utilize our framework.</p>
+</blockquote>
+<ul>
+<li>blockchain based framework</li>
+<li>Workflow (integrate typical crowdsourcing process with blockchian)</li>
+<li>smart contract (existing crowdsourcing algorithms) (incentive mechanism in smart contracts)</li>
+<li>several API (on Ethereum)</li>
+<li>Android client for users to utilize the framework</li>
+</ul>
+<blockquote>
+<p>In the rest of the paper, we present Fluid in Sec. 2, our implementation in Sec. 3, and demonstration plan in Sec. 4.</p>
+</blockquote>
+<p>So in general it is just a software with the concept of blockchain.</p>
+<h2 id="learn-the-figure"><a href="#learn-the-figure" class="headerlink" title="learn the figure"></a>learn the figure</h2><p><img src="/images/fluid-blockchain-based-crowdsourcing.images/image-20210309150938970.png" alt="image-20210309150938970"></p>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><h3 id="TASK-CREATION"><a href="#TASK-CREATION" class="headerlink" title="TASK CREATION"></a>TASK CREATION</h3><p>Record the task copies by the smart contracts in Blockchain</p>
+<p><strong>REQUESTERS</strong></p>
+<ol>
+<li>Submit tasks to the platform with requirements (e.g., expertise, ddl)</li>
+<li>transmit some credit (payment) that they are willing to pay from their credit contract to the platform’s credit contract</li>
+</ol>
+<p><strong>PLATFORM</strong></p>
+<ol>
+<li>decompose the raw tasks into atomic tasks</li>
+<li>generate a <em>worker selection</em> function</li>
+<li>chose the <em>incentive</em> function</li>
+<li>(Task content, worker selection function, incentive function) -&gt; smart contract which will be published on the Blockchain</li>
+</ol>
+<h3 id="TASK-PROCESSING"><a href="#TASK-PROCESSING" class="headerlink" title="TASK PROCESSING"></a>TASK PROCESSING</h3><p><strong>WORKER</strong></p>
+<ol>
+<li>Accept the task by transmitting required credit in the task contract</li>
+</ol>
+<p>And the unqualified worker will be rejected by the worker selection function</p>
+<p style="color: red">Why the worker need to transmit required credit? And where is the required credit defined?</p>
+
+<blockquote>
+<p>To mortgage the credit from the credit contract to the task contract</p>
+</blockquote>
+<ol>
+<li>submit answers to platform</li>
+<li>A transaction (including digest of the answer) (task &lt;-&gt; worker) will be generated and sent to Blockchain</li>
+</ol>
+<h3 id="TASK-COMPLETION"><a href="#TASK-COMPLETION" class="headerlink" title="TASK COMPLETION"></a>TASK COMPLETION</h3><p><strong>PLATFORM</strong></p>
+<ol>
+<li>confirm the results, and send a completion record to the task contract</li>
+<li>choose to active zero-knowledge proof function for others to verify the completion of the task</li>
+<li>return the final result</li>
+</ol>
+<h2 id="SMART-CONTRACT"><a href="#SMART-CONTRACT" class="headerlink" title="SMART CONTRACT"></a>SMART CONTRACT</h2><h3 id="Identity-contract"><a href="#Identity-contract" class="headerlink" title="Identity contract"></a>Identity contract</h3><p>Each user has a unique Blockchain node address.</p>
+<address, role="">
+
+<h3 id="Credit-contract"><a href="#Credit-contract" class="headerlink" title="Credit contract"></a>Credit contract</h3><p>record the credit and expertise of the user. ( a kind of digital token)</p>
+<p>Represent reputation in different platforms, money, etc.</p>
+<p>Credit could be transferred, mortgaged, extracted between authorized users.</p>
+<h3 id="Task-contract"><a href="#Task-contract" class="headerlink" title="Task contract"></a>Task contract</h3><p><strong>CONTAINING</strong></p>
+<ol>
+<li>task content</li>
+<li>basics of a task(type, description, deadline, requirements, etc.)</li>
+<li>global status</li>
+<li>current status</li>
+<li>corresponding requester</li>
+<li>worker</li>
+<li>crowdsourcing platform</li>
+<li>incentive function</li>
+<li>task pricing</li>
+<li>Reputation maintaining function</li>
+<li><strong>zero-knowledge proof function</strong> (Zk-function)</li>
+<li>verify a task is actually done without exposing the results for privacy protection</li>
+<li><em>zk-SNARKs</em> ⭐️⭐️ ( an algorithm )</li>
+</ol>
+<p style="color:red; background: yellow;">After the task completion, the task contract and the credit contract will be updated.</p>
+
+
+
+
+
+
+
+<h2 id="IMPLEMENTATION"><a href="#IMPLEMENTATION" class="headerlink" title="IMPLEMENTATION"></a>IMPLEMENTATION</h2><ol>
+<li>go-Ethereum</li>
+<li>OPQ-based method to decompose a task into several atomic tasks</li>
+<li>the incentive mechanism in [4] to determine the price of a task</li>
+<li>greedy-based method in [12] to speed up the task completion</li>
+<li>an Android application</li>
+</ol>
+<p><img src="/images/fluid-blockchain-based-crowdsourcing.images/image-20210309171414971.png" alt="image-20210309171414971"></p>
+<p><img src="images/fluid-blockchain-based-crowdsourcing.images/image-20210309171432900.png" alt="image-20210309171432900" style="zoom:80%;"></p>
+<h2 id="Scenarios"><a href="#Scenarios" class="headerlink" title="Scenarios"></a>Scenarios</h2><ul>
+<li>task lifecycle simulation</li>
+<li>credit contract checking</li>
+</ul>
+</address,>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    PetnaKanojo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/" title="[Note]Fluid: A blockchain based framework for crowdsourcing">http://moe.petnakanojo.com/2021/04/24/Note-Fluid-A-blockchain-based-framework-for-crowdsourcing/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/【翻译】当你访问一个URL时发生了什么/" rel="next" title="【翻译】当你访问一个URL的时候到底发生了什么">
+                <i class="fa fa-chevron-left"></i> 【翻译】当你访问一个URL的时候到底发生了什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">PetnaKanojo</p>
+              <p class="site-description motion-element" itemprop="description">永远温柔可爱</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paper-here"><span class="nav-number">2.</span> <span class="nav-text">Paper here</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fluid-A-Blockchain-based-Framework-for-Crowdsourcing"><span class="nav-number"></span> <span class="nav-text">Fluid:A Blockchain based Framework for Crowdsourcing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Promotion"><span class="nav-number">1.</span> <span class="nav-text">Promotion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-the-figure"><span class="nav-number">2.</span> <span class="nav-text">learn the figure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Workflow"><span class="nav-number">3.</span> <span class="nav-text">Workflow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TASK-CREATION"><span class="nav-number">3.1.</span> <span class="nav-text">TASK CREATION</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TASK-PROCESSING"><span class="nav-number">3.2.</span> <span class="nav-text">TASK PROCESSING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TASK-COMPLETION"><span class="nav-number">3.3.</span> <span class="nav-text">TASK COMPLETION</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMART-CONTRACT"><span class="nav-number">4.</span> <span class="nav-text">SMART CONTRACT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Identity-contract"><span class="nav-number">4.1.</span> <span class="nav-text">Identity contract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Credit-contract"><span class="nav-number">4.2.</span> <span class="nav-text">Credit contract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-contract"><span class="nav-number">4.3.</span> <span class="nav-text">Task contract</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMPLEMENTATION"><span class="nav-number">5.</span> <span class="nav-text">IMPLEMENTATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scenarios"><span class="nav-number">6.</span> <span class="nav-text">Scenarios</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PetnaKanojo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">58.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+<span>|&nbsp;  <a href="http://www.miitbeian.gov.cn/">  沪ICP备17003868号-1  </a></span>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 您是这里的第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      个小伙伴～
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      views.
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
